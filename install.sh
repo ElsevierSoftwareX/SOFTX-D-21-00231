@@ -4,7 +4,7 @@
 
 echo 'How old are you?'
 
-apt install net-tools
+apt-get install -y net-tools
 
 mkdir theBanana
 
