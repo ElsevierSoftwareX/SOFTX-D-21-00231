@@ -1,0 +1,53 @@
+# -*- Mode: python; py-indent-offset: 4; indent-tabs-mode: nil; coding: utf-8; -*-
+
+# def options(opt):
+#     pass
+
+def configure(conf):
+    conf.env['protolib'] = conf.check(lib='protobuf', uselib_store='PB',args=['--cflags', '--libs','protobuf','-pthread', '-lprotobuf', '-lpthread'],mandatory=True)
+    conf.env['sodium'] = conf.check( compiler='gcc',mandatory=True,lib='sodium',uselib_store='LS',cflags='-Wall')
+
+def build(bld):
+    module = bld.create_ns3_module('onion_routing_wsn', ['applications'])
+    module.source = [
+        'model/sink.cc',
+        'model/wsn_node.cc',
+        'helper/sink-helper.cc',
+        'protobuf/proto-packet.pb.cc',
+        'protocol/serializationwrapper.cc',
+        'protocol/segmentnum.cc',
+        'managers/outputmanager.cc',
+        'managers/onionvalidator.cc',
+        'model/sensornode.cc',
+        'helper/sensornode-helper.cc',
+        'managers/onionmanager.cc',
+        ]
+
+
+    module.use.append("LS")
+    module.use.append("PB")
+    module.env.append_value("CXXFLAGS", ['-pthread', '-lprotobuf','-I/usr/local/include','-L/usr/local/lib'])
+    module.env.append_value("LINKFLAGS", ["-L/usr/local/lib"])
+    
+
+    obj = bld.create_ns3_program('onion-routing-wsn', ['applications','mobility','wifi','dsdv','dsr','aodv','olsr','config-store','onion_routing_wsn','onion-routing'])
+    obj.source = 'wsnconstructor.cc'
+    obj.header = 'wsnconstructor.h'
+
+    headers = bld(features='ns3header')
+    headers.module = 'onion_routing_wsn'
+    headers.source = [
+        'model/sink.h',
+        'model/wsn_node.h',
+        'helper/sink-helper.h',
+        'protobuf/proto-packet.pb.h',
+        'protocol/serializationwrapper.h',
+        'protocol/segmentnum.h',
+        'managers/outputmanager.h',
+        'managers/onionvalidator.h',
+        'model/sensornode.h',
+        'helper/sensornode-helper.h',
+        'managers/onionmanager.h',
+        'model/enums.h'
+        ]
+

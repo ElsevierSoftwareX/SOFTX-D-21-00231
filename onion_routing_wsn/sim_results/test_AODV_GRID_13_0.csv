@@ -1,0 +1,28 @@
+---------------------------------Simulation description-----------------------------------
+Simulation name: test_AODV_GRID_13_0
+Simulation randomstream setup, run: 1, seed:1
+Total sensornodes: 13 and 1 sink node 
+Wireless: IEEE 802.11n at 2.4GHz, , DataMode: HtMcs1, ControlMode: HtMcs1, MTU:1280, MSS:536
+Network topology: GRID with row size: 3. Distance between nodes on X-axis: 60m. Distance between nodes on Y-axis: 60m. Sink node located at x:60,y:60 
+Routing: AODV
+Routing setup time: 20s, nodes are starting sequentially with 200ms interval, onion starts at: 27s
+Onion path lengths: 5 10 15  repeate each path lenght 1 times.
+Simulation started at: Wed Nov 24 16:47:33 2021
+--csv headers--
+onion_details,sim_name,sim_num,num_of_nodes,topology,routing,onion_id,packet_size,onion_head_size,onion_body_size,onion_path_length,sent_at,recv_at,query_time_to_return
+onion_routing,sim_name,sim_num,num_of_nodes,topology,routing,onion_id,send_ip,recv_ip,packet_size,onion_head_size,onion_body_size,sent_at,recv_at,hop_time
+timeout,sim_name,sim_num,num_of_nodes,topology,routing,onion_id,onion_path_length,abort_time
+node_details,sim_name,sim_num,num_of_nodes,topology,routing,coord_x,coord_y,node_degree
+-----------------------------------Simulation output--------------------------------------
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,1,10.1.0.1,10.1.0.6,411,267,134,28.400000,28.409390,0.009390
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,1,10.1.0.6,10.1.0.7,411,267,134,28.409390,28.676238,0.266848
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,1,10.1.0.7,10.1.0.10,411,267,134,28.676238,28.679387,0.003149
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,1,10.1.0.10,10.1.0.6,411,267,134,28.679387,28.944991,0.265604
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,1,10.1.0.6,10.1.0.11,411,267,134,28.944991,28.948696,0.003705
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,1,10.1.0.11,10.1.0.1,411,267,134,28.948696,28.956595,0.007899
+onion_details,test_AODV_GRID_13_0,0,13,grid,aodv,1,411,267,134,5,28.400000,28.956595,0.556595
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,2,10.1.0.1,10.1.0.14,671,527,134,29.456595,29.487617,0.031022
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,2,10.1.0.14,10.1.0.12,671,527,134,29.487617,30.491615,1.003998
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,2,10.1.0.12,10.1.0.4,671,527,134,30.491615,30.765531,0.273916
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,2,10.1.0.4,10.1.0.7,672,528,134,30.765531,30.771437,0.005906
+onion_routing,test_AODV_GRID_13_0,0,13,grid,aodv,2,10.1.0.7,10.1.0.13,672,528,134,30.771437,30.790648,0.019211

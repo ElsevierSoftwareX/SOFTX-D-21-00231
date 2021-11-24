@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns3>
+ <!-- Seed value of the simulation -->
+ <default name="ns3::WsnConstructor::SimulationSeed" value="0"/>
+ <!-- Name of the simulation -->
+ <default name="ns3::WsnConstructor::SimulationName" value="default"/> 
+ <!-- Path to the output directory -->
+ <default name="ns3::OutputManager::OutputPath" value="./src/onion_routing_wsn/sim_results/"/> 
+ <!-- Network topology (random disc topology OR grid topology) -->
+ <default name="ns3::WsnConstructor::Topology" value="grid"/> 
+ <!-- Carrier frequency of the IEEE 802.11n -->
+ <default name="ns3::WsnConstructor::IEEE80211n_carrier" value="2_4GHz"/> 
+ <!-- MCS for data transfer -->
+ <default name="ns3::ConstantRateWifiManager::DataMode" value="HtMcs1"/>  
+ <!-- MCS for control traffic -->
+ <default name="ns3::ConstantRateWifiManager::ControlMode" value="HtMcs1"/> 
+ <!-- Routing algorithm for wireless multi-hop networks -->
+ <default name="ns3::WsnConstructor::Routing" value="aodv"/>  
+ <!-- Number of sensor nodes in the network -->
+ <default name="ns3::WsnConstructor::NodeNumber" value="25"/> 
+ <!-- TCP maximum segment size -->
+ <default name="ns3::WsnConstructor::MSS" value="536"/>   
+ <!-- Maximum Transmission Unit -->
+ <default name="ns3::WifiNetDevice::Mtu" value="1280"/>   
+  <!-- Starting delay of sensor nodes in milliseconds -->
+ <default name="ns3::Wsn_node::Delay" value="200"/>  
+ <!-- Parameter for the setup of the random disc topology -->
+ <default name="ns3::WsnConstructor::Radius" value="50"/>  
+  <!-- Distance between neighbouring nodes -->
+ <default name="ns3::WsnConstructor::CellSide" value="60"/> 
+  <!-- String of values delimited by (,) each value representing the number of hops the onion will travel-->
+ <default name="ns3::WsnConstructor::Paths" value="5,10,15"/> 
+ <!-- Integer specifying the number of times to generate the onion message for each value of the parameter Paths-->
+ <default name="ns3::WsnConstructor::RepeatePaths" value="1"/>   
+  <!-- Verbosity of the simulation -->
+ <default name="ns3::WsnConstructor::Verbosity" value="both"/>  
+ <!-- The watchdog timer set to abort onion messagess -->
+ <default name="ns3::Wsn_node::OnionTimeout" value="100"/>  
+ <!-- Maintain a fixed onion size by adding padding -->
+ <default name="ns3::Sink::FixedOnionSize" value="true"/>  
+ <!-- Modify the behaviour of the onion body -->
+ <default name="ns3::Sink::BodyOptions" value="both"/> 
+ <!-- Size of the onion body maintained fixed during the simulation --> 
+ <default name="ns3::Sink::BodySize" value="128"/>  
+</ns3>
+
+<!-- comment -->

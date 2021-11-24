@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package protomessage;
+
+message ProtoPacket {
+
+	message OnionHead {
+		optional int32 onionId = 1;
+		optional bytes onion_message = 2;
+		optional bytes padding = 3;
+	}
+
+	message OnionBody {
+		optional int32 aggregatedValue = 1;
+		optional bytes padding = 2;
+	}
+
+	message Handshake {
+		optional bytes publickey = 1;
+	}
+
+	optional Handshake h_shake = 1;
+	optional OnionHead o_head = 2;
+	optional OnionBody o_body = 3;
+}
