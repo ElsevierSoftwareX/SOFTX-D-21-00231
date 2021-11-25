@@ -24,12 +24,13 @@
 
 
 ## Table of contents
-* [General info](general-info)
+* [General info](#general-info)
+* [Acknowledgments](#acknowledgments)
 * [Technologies](#technologies)
 * [Version](#version)
 * [Documentation](#documentation) 
 * [How to Run](#how-to-run)
-* [Setup](#setup)
+* [Installation and Setup](#installation-and-setup)
 
 ## General info
 This project was developed to demonstrate the feasibility of the concept presented in the research paper:
@@ -39,6 +40,12 @@ Description of software functionalities and architecture can be found in the pap
 A code ocean capsule can be found at:
 
 A docker image can be found at:
+
+
+## Acknowledgments
+
+We would like to acknowledge the collegue dr. Jernej Vičič from the University of Primorska
+Faculty of Mathematics, Natural Sciences and Information Technologies, and prof. dr. Mihael Mrissa from Innorenew CoE for the theoretical fundations, which are the basis for this implementation.
 
 ## Technologies
 The project is created with:
@@ -51,6 +58,34 @@ The project is created with:
 Version 1.0
 
 ## How to Run
+
+First install everything following the: [Installation and Setup](#installation-and-setup)
+<br>
+Then move to the directory:
+
+
+```
+ ns-3-allinone/ns-3.35/
+```
+
+To execute the simulator and source parameters from the configuration file, run:
+
+
+```
+ $ ./waf --run onion-routing-wsn
+```
+
+
+To execute the simulator and source parameters from CLI and the configuration file, run:
+
+
+```
+ $ ./waf --run "onion-routing-wsn --a_simNum=0 --a_name=test --a_routing=aodv  --a_topology=grid  --a_nodeNumber=13 "
+```
+
+To execute multiple simulations in parallel, check the Python script: [SimulationManager](link-to-sim-manager)
+
+
 
 ## Documentation
 
@@ -231,7 +266,7 @@ Set the onion body size to emulate the transportation of data / computer code in
 
 
   
-## Setup
+## Installation and Setup
 
 ### Docker
 
