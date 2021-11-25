@@ -1,3 +1,26 @@
+/* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
+
+
+/*
+* Copyright (c) 2020 DLTLT 
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License version 2 as
+* published by the Free Software Foundation;
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+* Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
+*/
+
+
 #include <iostream>
 #include <string>
 
@@ -69,11 +92,8 @@ using namespace ns3;
 /**
  *  \defgroup onion_routing_wsn
  * 
- *  This section documents the API of the ns-3 OnionRoutingWSN module.
- *  For a functional description, please refer to the ns-3 manual here:
- *  http://www.nsnam.org/docs/models/html/onion_routing_wsn.html
  *
- *  Be sure to read the manual BEFORE going down to the API.
+ *  Be sure to read repository README.md before going down to the API.
  */
 
 /**
@@ -154,7 +174,7 @@ private:
 
   /**
   *
-  * \brief  Create the sink node and sensor nodes
+  * \brief  Create node objects
   * 
   */
   void CreateNodes ();

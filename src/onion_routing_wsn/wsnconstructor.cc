@@ -1,4 +1,23 @@
 
+/*
+* Copyright (c) 2020 DLTLT 
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License version 2 as
+* published by the Free Software Foundation;
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+* Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
+*/
+
 #include "wsnconstructor.h"
 #include "ns3/sensornode.h"
 #include "ns3/sensornode-helper.h"
@@ -28,75 +47,74 @@ TypeId
 WsnConstructor::GetTypeId ()
 {
   static TypeId tid =
-      TypeId ("ns3::WsnConstructor")
-          .SetParent<Object> ()
-          .AddConstructor<WsnConstructor> ()
-          .AddAttribute ("SimulationSeed", "Seed value of the simulation",
-                         TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
-                         UintegerValue ((uint32_t) 0),
-                         MakeUintegerAccessor (&WsnConstructor::m_simulationSeed),
-                         MakeUintegerChecker<uint32_t> ())
-          .AddAttribute ("SimulationName", "Name of the simulation", StringValue ("default"),
-                         MakeStringAccessor (&WsnConstructor::m_simulationName),
-                         MakeStringChecker ())
-          .AddAttribute ("Topology", "Network topology (random disc topology OR grid topology)",
-                         EnumValue (Topology::GRID), MakeEnumAccessor (&WsnConstructor::m_topology),
-                         MakeEnumChecker (Topology::GRID, "grid", Topology::DISC, "disc"))
-          .AddAttribute (
-              "IEEE80211n_carrier", "Carrier frequency of the IEEE 802.11n",
-              EnumValue (IEEE_80211n::F_24GHz), MakeEnumAccessor (&WsnConstructor::m_mac),
-              MakeEnumChecker (IEEE_80211n::F_24GHz, "2_4GHz", IEEE_80211n::F_5GHz, "5GHz"))
-          .AddAttribute ("Routing", "Routing algorithm for wireless multi-hop networks",
-                         EnumValue (Routing::OLSR), MakeEnumAccessor (&WsnConstructor::m_routing),
-                         MakeEnumChecker (Routing::AODV, "aodv", Routing::DSR, "dsr", Routing::OLSR,
-                                          "olsr", Routing::DSDV, "dsdv"))
-          .AddAttribute ("NodeNumber", "Number of sensor nodes in the network",
-                         TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
-                         UintegerValue ((uint16_t) 50),
-                         MakeUintegerAccessor (&WsnConstructor::m_numNodes),
-                         MakeUintegerChecker<uint16_t> ())
-          .AddAttribute ("Radius", "Parameter for the setup of the random disc topology",
-                         TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
-                         UintegerValue ((uint16_t) 15),
-                         MakeUintegerAccessor (&WsnConstructor::m_radius),
-                         MakeUintegerChecker<uint16_t> ())
-          .AddAttribute ("CellSide",
-                         "The length of a cell side in the grid topology. The length is "
-                         "representing the distance between neighbouring nodes on the cardinal "
-                         "directions of the reference node.",
-                         TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
-                         UintegerValue ((uint16_t) 20),
-                         MakeUintegerAccessor (&WsnConstructor::m_cellSide),
-                         MakeUintegerChecker<uint16_t> ())
-          .AddAttribute ("Verbosity", "Verbosity of the simulation", EnumValue (Verbosity::Both),
-                         MakeEnumAccessor (&WsnConstructor::m_verbosity),
-                         MakeEnumChecker (Verbosity::NO, "no", Verbosity::ConsoleLog, "consoleLog",
-                                          Verbosity::PrintDescription, "description",
-                                          Verbosity::Both, "both"))
-          .AddAttribute ("MSS", "Maximum segment size",
-                         TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
-                         UintegerValue (536), MakeUintegerAccessor (&WsnConstructor::m_mss),
-                         MakeUintegerChecker<uint16_t> ())
-          .AddAttribute (
-              "Paths",
-              "String of values delimited by the symbol \",\" each value representing the number "
-              "of hops the onion will travel to return back to the sink node issuer of the onion.",
-              StringValue ("5,10,20,30,40,50"),
-              MakeStringAccessor (&WsnConstructor::m_pathsLengths), MakeStringChecker ())
-          .AddAttribute ("RepeatePaths",
-                         "Integer specifying the number of times to generate the onion message for "
-                         "each value of the parameter Paths",
-                         TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
-                         UintegerValue ((uint16_t) 1),
-                         MakeUintegerAccessor (&WsnConstructor::m_onionRepeate),
-                         MakeUintegerChecker<uint16_t> ());
+    TypeId ("ns3::WsnConstructor")
+    .SetParent<Object> ()
+    .AddConstructor<WsnConstructor> ()
+    .AddAttribute ("SimulationSeed", "Seed value of the simulation",
+                   TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
+                   UintegerValue ((uint32_t) 0),
+                   MakeUintegerAccessor (&WsnConstructor::m_simulationSeed),
+                   MakeUintegerChecker<uint32_t> ())
+    .AddAttribute ("SimulationName", "Name of the simulation", StringValue ("default"),
+                   MakeStringAccessor (&WsnConstructor::m_simulationName),
+                   MakeStringChecker ())
+    .AddAttribute ("Topology", "Network topology (random disc topology OR grid topology)",
+                   EnumValue (Topology::GRID), MakeEnumAccessor (&WsnConstructor::m_topology),
+                   MakeEnumChecker (Topology::GRID, "grid", Topology::DISC, "disc"))
+    .AddAttribute (
+      "IEEE80211n_carrier", "Carrier frequency of the IEEE 802.11n",
+      EnumValue (IEEE_80211n::F_24GHz), MakeEnumAccessor (&WsnConstructor::m_mac),
+      MakeEnumChecker (IEEE_80211n::F_24GHz, "2_4GHz", IEEE_80211n::F_5GHz, "5GHz"))
+    .AddAttribute ("Routing", "Routing algorithm for wireless multi-hop networks",
+                   EnumValue (Routing::OLSR), MakeEnumAccessor (&WsnConstructor::m_routing),
+                   MakeEnumChecker (Routing::AODV, "aodv", Routing::DSR, "dsr", Routing::OLSR,
+                                    "olsr", Routing::DSDV, "dsdv"))
+    .AddAttribute ("NodeNumber", "Number of sensor nodes in the network",
+                   TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
+                   UintegerValue ((uint16_t) 50),
+                   MakeUintegerAccessor (&WsnConstructor::m_numNodes),
+                   MakeUintegerChecker<uint16_t> ())
+    .AddAttribute ("Radius", "Parameter for the setup of the random disc topology",
+                   TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
+                   UintegerValue ((uint16_t) 15),
+                   MakeUintegerAccessor (&WsnConstructor::m_radius),
+                   MakeUintegerChecker<uint16_t> ())
+    .AddAttribute ("CellSide",
+                   "The length of a cell side in the grid topology. The length is "
+                   "representing the distance between neighbouring nodes on the cardinal "
+                   "directions of the reference node.",
+                   TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
+                   UintegerValue ((uint16_t) 20),
+                   MakeUintegerAccessor (&WsnConstructor::m_cellSide),
+                   MakeUintegerChecker<uint16_t> ())
+    .AddAttribute ("Verbosity", "Verbosity of the simulation", EnumValue (Verbosity::Both),
+                   MakeEnumAccessor (&WsnConstructor::m_verbosity),
+                   MakeEnumChecker (Verbosity::NO, "no", Verbosity::ConsoleLog, "consoleLog",
+                                    Verbosity::PrintDescription, "description",
+                                    Verbosity::Both, "both"))
+    .AddAttribute ("MSS", "Maximum segment size",
+                   TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
+                   UintegerValue (536), MakeUintegerAccessor (&WsnConstructor::m_mss),
+                   MakeUintegerChecker<uint16_t> ())
+    .AddAttribute (
+      "Paths",
+      "String of values delimited by the symbol \",\" each value representing the number "
+      "of hops the onion will travel to return back to the sink node issuer of the onion.",
+      StringValue ("5,10,20,30,40,50"),
+      MakeStringAccessor (&WsnConstructor::m_pathsLengths), MakeStringChecker ())
+    .AddAttribute ("RepeatePaths",
+                   "Integer specifying the number of times to generate the onion message for "
+                   "each value of the parameter Paths",
+                   TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
+                   UintegerValue ((uint16_t) 1),
+                   MakeUintegerAccessor (&WsnConstructor::m_onionRepeate),
+                   MakeUintegerChecker<uint16_t> ());
   return tid;
 }
 
 //constructor
 WsnConstructor::WsnConstructor ()
-{
-}
+{}
 
 void
 WsnConstructor::Configure ()
@@ -106,28 +124,28 @@ WsnConstructor::Configure ()
 
   switch (m_routing)
     {
-    case Routing::AODV:
-      m_simulationName = m_simulationName + "_AODV";
-      break;
-    case Routing::DSR:
-      m_simulationName = m_simulationName + "_DSR";
-      break;
-    case Routing::OLSR:
-      m_simulationName = m_simulationName + "_OLSR";
-      break;
-    case Routing::DSDV:
-      m_simulationName = m_simulationName + "_DSDV";
-      break;
+      case Routing::AODV:
+        m_simulationName = m_simulationName + "_AODV";
+        break;
+      case Routing::DSR:
+        m_simulationName = m_simulationName + "_DSR";
+        break;
+      case Routing::OLSR:
+        m_simulationName = m_simulationName + "_OLSR";
+        break;
+      case Routing::DSDV:
+        m_simulationName = m_simulationName + "_DSDV";
+        break;
     }
 
   switch (m_topology)
     {
-    case Topology::GRID:
-      m_simulationName = m_simulationName + "_GRID_";
-      break;
-    case Topology::DISC:
-      m_simulationName = m_simulationName + "_DISC_";
-      break;
+      case Topology::GRID:
+        m_simulationName = m_simulationName + "_GRID_";
+        break;
+      case Topology::DISC:
+        m_simulationName = m_simulationName + "_DISC_";
+        break;
     }
 
   //set the maximum segment size of the network
@@ -135,15 +153,15 @@ WsnConstructor::Configure ()
   Config::SetDefault ("ns3::Wsn_node::MSS", UintegerValue (m_mss));
 
   m_simulationName =
-      m_simulationName + std::to_string (m_numNodes) + "_" + std::to_string (m_simulationSeed);
+    m_simulationName + std::to_string (m_numNodes) + "_" + std::to_string (m_simulationSeed);
 
   m_simulationDescription = m_simulationDescription + "Simulation name: " + m_simulationName + "\n";
 
   int run = RngSeedManager::GetRun ();
   int seed = RngSeedManager::GetRun ();
   m_simulationDescription = m_simulationDescription +
-                            "Simulation randomstream setup, run: " + std::to_string (run) +
-                            ", seed:" + std::to_string (seed) + "\n";
+    "Simulation randomstream setup, run: " + std::to_string (run) +
+    ", seed:" + std::to_string (seed) + "\n";
 
   m_onionValidator = CreateObject<OnionValidator> ();
 
@@ -182,12 +200,12 @@ WsnConstructor::Run ()
 
   switch (m_topology)
     {
-    case Topology::GRID:
-      BuildGridTopology ();
-      break;
-    case Topology::DISC:
-      BuildDiscTopology ();
-      break;
+      case Topology::GRID:
+        BuildGridTopology ();
+        break;
+      case Topology::DISC:
+        BuildDiscTopology ();
+        break;
     }
 
   InstallInternetStack ();
@@ -195,7 +213,7 @@ WsnConstructor::Run ()
 
   time_t givemetime = time (NULL);
   m_simulationDescription =
-      m_simulationDescription + "Simulation started at: " + ctime (&givemetime);
+    m_simulationDescription + "Simulation started at: " + ctime (&givemetime);
 
   m_outputManager->PrintIntro (m_simulationDescription);
 
@@ -217,9 +235,9 @@ WsnConstructor::Run ()
 }
 
 /**
- *  Convert the string given as parameter containing path lenghts in the array  
+ *  Convert the string given as parameter containing path lenghts in the array
  *  m_onionPathsLenghts containing a path length in each cell
- * 
+ *
  */
 
 void
@@ -243,13 +261,13 @@ WsnConstructor::ProcessPathString ()
   while (end != -1)
     {
       m_onionPathsLengths[i] =
-          (uint16_t) (unsigned int) std::stoi (m_pathsLengths.substr (start, end - start));
+        (uint16_t) (unsigned int) std::stoi (m_pathsLengths.substr (start, end - start));
       start = end + 1; //increase by the delimiter size in this case one symbol (,)
       end = m_pathsLengths.find (',', start);
       i++;
     }
   m_onionPathsLengths[i] =
-      (uint16_t) (unsigned int) std::stoi (m_pathsLengths.substr (start, end - start));
+    (uint16_t) (unsigned int) std::stoi (m_pathsLengths.substr (start, end - start));
 }
 
 /**
@@ -268,8 +286,8 @@ WsnConstructor::CreateNodes ()
   wifiNodes.Add (sensornodes);
 
   m_simulationDescription = m_simulationDescription +
-                            "Total sensornodes: " + std::to_string (sensornodes.GetN ()) +
-                            " and 1 sink node \n";
+    "Total sensornodes: " + std::to_string (sensornodes.GetN ()) +
+    " and 1 sink node \n";
 }
 
 /**
@@ -284,12 +302,12 @@ WsnConstructor::CreateDevices ()
   //define the used standard
   switch (m_mac)
     {
-    case IEEE_80211n::F_24GHz:
-      wifi.SetStandard (WIFI_STANDARD_80211n_2_4GHZ);
-      break;
-    case IEEE_80211n::F_5GHz:
-      wifi.SetStandard (WIFI_STANDARD_80211n_5GHZ);
-      break;
+      case IEEE_80211n::F_24GHz:
+        wifi.SetStandard (WIFI_STANDARD_80211n_2_4GHZ);
+        break;
+      case IEEE_80211n::F_5GHz:
+        wifi.SetStandard (WIFI_STANDARD_80211n_5GHZ);
+        break;
     }
 
   wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager");
@@ -311,20 +329,20 @@ WsnConstructor::CreateDevices ()
 
   switch (m_mac)
     {
-    case IEEE_80211n::F_24GHz:
-      //if wifiPhy is 2.4Ghz
-      wifiChannel.AddPropagationLoss ("ns3::LogDistancePropagationLossModel", "Exponent",
-                                      DoubleValue (3.0), "ReferenceLoss", DoubleValue (40.0459));
-      m_simulationDescription =
+      case IEEE_80211n::F_24GHz:
+        //if wifiPhy is 2.4Ghz
+        wifiChannel.AddPropagationLoss ("ns3::LogDistancePropagationLossModel", "Exponent",
+                                        DoubleValue (3.0), "ReferenceLoss", DoubleValue (40.0459));
+        m_simulationDescription =
           m_simulationDescription + "Wireless: IEEE 802.11n at 2.4GHz, " + mcs_details;
-      break;
-    case IEEE_80211n::F_5GHz:
-      //if wifiPhy is default - 5Ghz
-      wifiChannel.AddPropagationLoss ("ns3::LogDistancePropagationLossModel", "Exponent",
-                                      DoubleValue (3.0));
-      m_simulationDescription =
+        break;
+      case IEEE_80211n::F_5GHz:
+        //if wifiPhy is default - 5Ghz
+        wifiChannel.AddPropagationLoss ("ns3::LogDistancePropagationLossModel", "Exponent",
+                                        DoubleValue (3.0));
+        m_simulationDescription =
           m_simulationDescription + "Wireless: IEEE 802.11n at 5GHz, " + mcs_details;
-      break;
+        break;
     }
 
   wifiPhy.SetChannel (wifiChannel.Create ());
@@ -343,7 +361,7 @@ WsnConstructor::CreateDevices ()
   UintegerValue mtu;
   wifiDevices.Get (0)->GetAttribute ("Mtu", mtu);
   m_simulationDescription = m_simulationDescription + ", MTU:" + std::to_string (mtu.Get ()) +
-                            ", MSS:" + std::to_string (m_mss) + "\n";
+    ", MSS:" + std::to_string (m_mss) + "\n";
 }
 
 /*backuppino IEEE802.11a
@@ -427,11 +445,11 @@ WsnConstructor::BuildDiscTopology ()
   int r_disc = m_radius * sqrt (m_numNodes);
 
   m_simulationDescription =
-      m_simulationDescription +
-      "Network topology: RANDOM DISC, node radius: " + std::to_string (m_radius) +
-      "m , disc topology radius: " + std::to_string (r_disc) +
-      "m. Sink node located at x:" + std::to_string ((int) r_disc) +
-      ",y:" + std::to_string ((int) r_disc) + " \n";
+    m_simulationDescription +
+    "Network topology: RANDOM DISC, node radius: " + std::to_string (m_radius) +
+    "m , disc topology radius: " + std::to_string (r_disc) +
+    "m. Sink node located at x:" + std::to_string ((int) r_disc) +
+    ",y:" + std::to_string ((int) r_disc) + " \n";
 
   /*// Uniform density disc
   ObjectFactory uniDisc;
@@ -501,15 +519,15 @@ WsnConstructor::BuildGridTopology ()
   double middleNode_y = middleNodeMobility->GetPosition ().y;
   //swap node positions
   middleNodeMobility->SetPosition (
-      Vector (sinkMobility->GetPosition ().x, sinkMobility->GetPosition ().y, 0));
+    Vector (sinkMobility->GetPosition ().x, sinkMobility->GetPosition ().y, 0));
   sinkMobility->SetPosition (Vector (middleNode_x, middleNode_y, 0));
 
   m_simulationDescription = m_simulationDescription +
-                            "Network topology: GRID with row size: " + std::to_string (row_size) +
-                            ". Distance between nodes on X-axis: " + std::to_string (deltaX) +
-                            "m. Distance between nodes on Y-axis: " + std::to_string (deltaY) +
-                            "m. Sink node located at x:" + std::to_string ((int) middleNode_x) +
-                            ",y:" + std::to_string ((int) middleNode_y) + " \n";
+    "Network topology: GRID with row size: " + std::to_string (row_size) +
+    ". Distance between nodes on X-axis: " + std::to_string (deltaX) +
+    "m. Distance between nodes on Y-axis: " + std::to_string (deltaY) +
+    "m. Sink node located at x:" + std::to_string ((int) middleNode_x) +
+    ",y:" + std::to_string ((int) middleNode_y) + " \n";
 }
 
 /**
@@ -523,22 +541,22 @@ WsnConstructor::InstallInternetStack ()
 
   switch (m_routing)
     {
-    case Routing::AODV:
-      m_outputManager->SetRouting (Routing::AODV);
-      AODVrouting ();
-      break;
-    case Routing::DSR:
-      m_outputManager->SetRouting (Routing::DSR);
-      DSRrouting ();
-      break;
-    case Routing::OLSR:
-      m_outputManager->SetRouting (Routing::OLSR);
-      OLSRrouting ();
-      break;
-    case Routing::DSDV:
-      m_outputManager->SetRouting (Routing::DSDV);
-      DSDVrouting ();
-      break;
+      case Routing::AODV:
+        m_outputManager->SetRouting (Routing::AODV);
+        AODVrouting ();
+        break;
+      case Routing::DSR:
+        m_outputManager->SetRouting (Routing::DSR);
+        DSRrouting ();
+        break;
+      case Routing::OLSR:
+        m_outputManager->SetRouting (Routing::OLSR);
+        OLSRrouting ();
+        break;
+      case Routing::DSDV:
+        m_outputManager->SetRouting (Routing::DSDV);
+        DSDVrouting ();
+        break;
     }
 
   Ipv4AddressHelper address;
@@ -657,22 +675,22 @@ WsnConstructor::InstallApplications ()
   UintegerValue node_delay;
   sinkApps.Get (0)->GetObject<Sink> ()->GetAttribute ("Delay", node_delay);
   int start_onion = (node_delay.Get () * m_numNodes) / 1000 +
-                    5; // when the sink node will start send onions in seconds
+    5;                 // when the sink node will start send onions in seconds
 
   m_simulationDescription =
-      m_simulationDescription + "Routing setup time: " + std::to_string (routing_setup_time) +
-      "s, nodes are starting sequentially with " + std::to_string (node_delay.Get ()) +
-      "ms interval, onion starts at: " + std::to_string (start_onion + routing_setup_time) + "s\n";
+    m_simulationDescription + "Routing setup time: " + std::to_string (routing_setup_time) +
+    "s, nodes are starting sequentially with " + std::to_string (node_delay.Get ()) +
+    "ms interval, onion starts at: " + std::to_string (start_onion + routing_setup_time) + "s\n";
 
   m_simulationDescription = m_simulationDescription + "Onion path lengths: ";
 
   for (int i = 0; i < m_numOnionPaths; ++i)
     {
       m_simulationDescription =
-          m_simulationDescription + std::to_string (m_onionPathsLengths[i]) + " ";
+        m_simulationDescription + std::to_string (m_onionPathsLengths[i]) + " ";
     }
   m_simulationDescription = m_simulationDescription + " repeate each path lenght " +
-                            std::to_string (m_onionRepeate) + " times.\n";
+    std::to_string (m_onionRepeate) + " times.\n";
 }
 
 int
@@ -690,8 +708,8 @@ main (int argc, char **argv)
   //load attributes setup from commandline
   CommandLine cmd;
   cmd.AddValue (
-      "a_simNum",
-      "ns3::WsnConstructor::SimulationSeed"); //number of the simulation, that defines the seed
+    "a_simNum",
+    "ns3::WsnConstructor::SimulationSeed");   //number of the simulation, that defines the seed
   cmd.AddValue ("a_name", "ns3::WsnConstructor::SimulationName"); // a name used as identifier
   cmd.AddValue ("a_routing",
                 "ns3::WsnConstructor::Routing"); //the selected routing protocol

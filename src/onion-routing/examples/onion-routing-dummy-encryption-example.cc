@@ -36,12 +36,8 @@
  *  The listed onion messagess are selected through the cmd argument onionMode. This argument defines the mode of operation of the example code.
  *    (The value preceeding the name should be given to the cmd argument)
  *
- *  !!NOTE!! the given example uses the external library <a href="https://libsodium.gitbook.io/doc/">libsodium</a> for encryption and decryption.
- *
  *
  *   Network topology
- *
- * 
  *
  *
  *                        n2-------------n3
@@ -59,9 +55,9 @@
  * - all links are point-to-point links with indicated delay
  * - onion messagess are sent using the UDP protocol
  * 
+ *
  *  Instructions:
- *        1) Download & setup libsodium library
- *        2) run in terminal: ./waf --run "src/internet-apps/examples/onion-routing-example.cc --onionMode=1"
+ *        1) run in terminal: ./waf --run "src/internet-apps/examples/onion-routing-dummy-encryption-example.cc --onionMode=1"
  *             --note~ the argument onionMode defines the mode of operation of the example -- see the upper list
  *
  * 
@@ -76,8 +72,6 @@
 #include "ns3/applications-module.h"
  
 
-#include <sodium.h>
-
 #define ONION_NO_CONTENT 0
 #define ONION_ENDCONTENT 1
 #define ONION_LAYERCONTENT 2
@@ -88,7 +82,7 @@
 using namespace ns3;
 
 
-NS_LOG_COMPONENT_DEFINE ("OnionRoutingExample");
+NS_LOG_COMPONENT_DEFINE ("OnionRoutingDummyEncryptionExample");
 
 
 //Serialize an Ipv4Address
@@ -135,99 +129,6 @@ std::string UcharToString (uint8_t* seq, int len)
 
 
 
-//Class that implements the Onion Routing class using the libsodium lybrary 
-class OnionManager : public OnionRouting 
-{
-public:
-  //get the typeid
-  static TypeId GetTypeId (void);
-  //constructor, need to setup encryption params
-  OnionManager ();
-  //dummy destructor
-  ~OnionManager ();
-
-  //Generate new key pair
-  void GenerateNewKeyPair ();
-
-  //return pk
-  uint8_t * GetPublicKey ();
-  //return sk
-  uint8_t * GetSecretKey ();
-
-  //implement encryption
-  virtual void EncryptLayer (uint8_t * ciphertext, uint8_t* message, int len, uint8_t * key) const;
-  //implement decryption
-  virtual void DecryptLayer (uint8_t * innerLayer, uint8_t* onion, uint16_t onionLen, uint8_t * pk, uint8_t * sk) const;
-
-  //the publickey
-  uint8_t m_publickey[crypto_box_PUBLICKEYBYTES];
-  //the secretkey
-  uint8_t m_secretkey[crypto_box_SECRETKEYBYTES];
-};
-
-
-TypeId
-OnionManager::GetTypeId (void)
-{
-  static TypeId tid = TypeId ("ns3::OnionManager")
-    .SetParent<OnionRouting> ()
-    .SetGroupName ("OnionRouting");
-  return tid;
-
-}
-
-
-
-
-OnionManager::OnionManager ()
-  : OnionRouting (crypto_box_SEALBYTES,Ipv4L3Protocol::PROT_NUMBER)
-{}
-
-
-
-OnionManager::~OnionManager ()
-{}
-
-
-void OnionManager::GenerateNewKeyPair ()
-{
-  crypto_box_keypair (m_publickey, m_secretkey);
-}
-
-uint8_t * OnionManager::GetPublicKey ()
-{
-  return m_publickey;
-}
-
-uint8_t * OnionManager::GetSecretKey ()
-{
-  return m_secretkey;
-}
-
-
-void OnionManager::EncryptLayer (uint8_t * ciphertext, uint8_t* message, int len, uint8_t * key) const
-{
-  if (crypto_box_seal (ciphertext, message, len, key) != 0)
-    {
-      NS_LOG_WARN ("Error during encryption");
-      m_errno = ERROR_ENCRYPTION;
-    }
-}
-
-
-
-void OnionManager::DecryptLayer (uint8_t * innerLayer, uint8_t* onion, uint16_t onionLen, uint8_t * pk, uint8_t * sk) const
-{
-  if (crypto_box_seal_open (innerLayer, onion, onionLen, pk, sk) != 0)
-    {
-      NS_LOG_WARN ("Messge corrupted or not for this node");
-      m_errno = ERROR_DECRYPTION;
-    }
-}
-
-
-
-
 
 //Application to be installed on nodes
 class MyApp : public Application
@@ -240,7 +141,7 @@ public:
   static TypeId GetTypeId (void);//return the typeid
 
   //return the pk
-  uint8_t * GetPublicKey ();
+  uint8_t * GetEncryptionKey ();
   //return ip address of the node
   Ipv4Address GetAddress ();
   //Setting up encryption & address
@@ -254,17 +155,17 @@ private:
   void SendOnion ();
   void RecvOnion (Ptr<Socket> socket);
 
-  Ptr<Socket>       m_socket;
-  Address           m_peer;
-  uint16_t          m_port;
-  Ipv4Address       m_address;
-  OnionManager      m_onionManager;
-  uint8_t           m_onionMode;
-  uint16_t          m_routeLen;
-  uint8_t **        m_ipRoute;
-  uint8_t **        m_keys;
-  uint8_t **        m_layerContent;
-  uint16_t          m_layerContentLen;
+  Ptr<Socket>                     m_socket;
+  Address                         m_peer;
+  uint16_t                        m_port;
+  Ipv4Address                     m_address;
+  OnionRoutingDummyEncryption     m_onionManager;
+  uint8_t                         m_onionMode;
+  uint16_t                        m_routeLen;
+  uint8_t **                      m_ipRoute;
+  uint8_t **                      m_keys;
+  uint8_t **                      m_layerContent;
+  uint16_t                        m_layerContentLen;
 
 };
 
@@ -272,6 +173,7 @@ MyApp::MyApp ()
   : m_socket (0),
     m_peer (),
     m_port (4242),
+    m_onionManager (32,Ipv4L3Protocol::PROT_NUMBER),
     m_routeLen (0)
 {}
 
@@ -281,6 +183,7 @@ MyApp::MyApp (uint8_t onionMode,uint16_t layerContentLen)
   : m_socket (0),
     m_peer (),
     m_port (4242),
+    m_onionManager (32,Ipv4L3Protocol::PROT_NUMBER),
     m_onionMode (onionMode),
     m_routeLen (0),
     m_layerContentLen (layerContentLen)
@@ -295,9 +198,9 @@ MyApp::~MyApp ()
 
 
 
-uint8_t * MyApp::GetPublicKey ()
+uint8_t * MyApp::GetEncryptionKey ()
 {
-  return m_onionManager.GetPublicKey ();
+  return m_onionManager.GetEncryptionKey ();
 }
 
 Ipv4Address MyApp::GetAddress ()
@@ -311,10 +214,10 @@ void MyApp::Setup ()
 {
 
   //setup encryption
-  m_onionManager.GenerateNewKeyPair ();
+  m_onionManager.GenerateNewKey ();
 
 
-  //Get node details 
+  //Get node details
   Ptr<Node> PtrNode = this->GetNode ();
   Ptr<Ipv4> ipv4 = PtrNode->GetObject<Ipv4> ();
   Ipv4InterfaceAddress iaddr = ipv4->GetAddress (1, 0);
@@ -340,7 +243,7 @@ TypeId MyApp::GetTypeId (void)
 {
   static TypeId tid = TypeId ("MyApp")
     .SetParent<Application> ()
-    .SetGroupName ("ORexample")
+    .SetGroupName ("OR-dummy-example")
     .AddConstructor<MyApp> ()
   ;
   return tid;
@@ -398,7 +301,7 @@ MyApp::SendOnion ()
   NS_LOG_INFO ("Onion construction--Onion sent to: " << ConstructIpv4 (m_ipRoute[0]) << " of size: " << p->GetSize () << " bytes" );
 
 }
- 
+
 //Performed when the node receives an onion
 void
 MyApp::RecvOnion (Ptr<Socket> socket)
@@ -419,7 +322,7 @@ MyApp::RecvOnion (Ptr<Socket> socket)
   p->CopyData (cipher, cipherLen);
 
   //decrypt onion layer
-  orLayer * onionLayer = m_onionManager.PeelOnion (cipher,cipherLen,m_onionManager.GetPublicKey (),m_onionManager.GetSecretKey ());
+  orLayer * onionLayer = m_onionManager.PeelOnion (cipher,cipherLen,m_onionManager.GetEncryptionKey (),m_onionManager.GetEncryptionKey ());
 
 
   if (ConstructIpv4 (onionLayer->nextHopIP).Get () == 0) //execute if onion mode -- -- was selected
@@ -434,7 +337,7 @@ MyApp::RecvOnion (Ptr<Socket> socket)
           Ptr<Packet> np = Create<Packet> (buff,onionLayer->innerLayerLen - m_layerContentLen);
           m_socket->SendTo (np, 0, InetSocketAddress (ConstructIpv4 (onionLayer->nextHopIP),m_port));
           NS_LOG_INFO ("Onion routing--Onion sent from: " << InetSocketAddress::ConvertFrom (from).GetIpv4 () << " received at: " << m_address <<  " of size: " << p->GetSize () << " bytes, containing the layer content: " << UcharToString (onionLayer->innerLayer,m_layerContentLen) << ", sent to: " << ConstructIpv4 (onionLayer->nextHopIP));
- 
+
         }
       else //execute if onion mode -- ONION_NO_CONTENT, ONION_ENDCONTENT, -- was selected
         {
@@ -445,7 +348,7 @@ MyApp::RecvOnion (Ptr<Socket> socket)
         }
     }
 
- 
+
 }
 
 
@@ -453,7 +356,7 @@ void
 MyApp::StartApplication (void)
 {
 
-  //Create socket 
+  //Create socket
   m_socket = Socket::CreateSocket (this->GetNode (), TypeId::LookupByName ("ns3::UdpSocketFactory"));
   m_socket->Bind (InetSocketAddress (Ipv4Address::GetAny (), m_port));
   m_socket->SetRecvCallback (MakeCallback (&MyApp::RecvOnion,this));
@@ -496,7 +399,7 @@ main (int argc, char *argv[])
 
   if (verbose)
     {
-      LogComponentEnable ("OnionRoutingExample", LOG_LEVEL_INFO);
+      LogComponentEnable ("OnionRoutingDummyEncryptionExample", LOG_LEVEL_INFO);
       LogComponentEnable ("onionrouting", LOG_LEVEL_INFO);
 
     }
@@ -509,6 +412,7 @@ main (int argc, char *argv[])
   /* ... */
 
 
+  
   //create the topology of six nodes
   NodeContainer nc;
   nc.Create (6);
@@ -608,19 +512,17 @@ main (int argc, char *argv[])
   ipRoute[4] = IpToBuff (applications.Get (5)->GetObject<MyApp> ()->GetAddress ());
 
   //encryption keys of nodes in the route
-  keys[0] = applications.Get (2)->GetObject<MyApp> ()->GetPublicKey ();
-  keys[1] = applications.Get (3)->GetObject<MyApp> ()->GetPublicKey ();
-  keys[2] = applications.Get (1)->GetObject<MyApp> ()->GetPublicKey ();
-  keys[3] = applications.Get (4)->GetObject<MyApp> ()->GetPublicKey ();
-  keys[4] = applications.Get (5)->GetObject<MyApp> ()->GetPublicKey ();
-
-  //set content of each layer
+  keys[0] = applications.Get (2)->GetObject<MyApp> ()->GetEncryptionKey ();
+  keys[1] = applications.Get (3)->GetObject<MyApp> ()->GetEncryptionKey ();
+  keys[2] = applications.Get (1)->GetObject<MyApp> ()->GetEncryptionKey ();
+  keys[3] = applications.Get (4)->GetObject<MyApp> ()->GetEncryptionKey ();
+  keys[4] = applications.Get (5)->GetObject<MyApp> ()->GetEncryptionKey ()
+ ; //set content of each layer
   layerContent[0] = StringToUchar ("OnionLayer 4 secret content");
   layerContent[1] = StringToUchar ("OnionLayer 3 secret content");
   layerContent[2] = StringToUchar ("OnionLayer 2 secret content");
   layerContent[3] = StringToUchar ("OnionLayer 1 secret content");
   layerContent[4] = StringToUchar ("OnionLayer 0 secret content");
-
 
   //setup the route at node 0, the node 0 will send the onion
   applications.Get (0)->GetObject<MyApp> ()->SetRoute (routeLen,ipRoute,keys,layerContent,layerContentLen);

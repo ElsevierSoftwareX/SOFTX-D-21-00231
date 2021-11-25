@@ -1,4 +1,26 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
+
+
+/*
+* Copyright (c) 2020 DLTLT 
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License version 2 as
+* published by the Free Software Foundation;
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+* Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
+*/
+
+
 #ifndef WSN_NODE_H
 #define WSN_NODE_H
 
@@ -26,17 +48,14 @@ namespace ns3 {
 /**
  *  \defgroup node-application
  * 
- *  This section documents the API of the ns-3 NodeApplication module.
- *  For a functional description, please refer to the ns-3 manual here:
- *  http://www.nsnam.org/docs/models/html/node-application.html
  *
- *  Be sure to read the manual BEFORE going down to the API.
+ *  Be sure to read repository README.md before going down to the API.
  */
 
 /**
  * \ingroup node-application
  * \class Wsn_node
- * \brief The wsn node base class that manages the sending and receiving packets and basic configuration
+ * \brief The wsn node base class that manages the sending and receiving of packets and basic configuration of nodes
  *
  */
 

@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "~/ns-3-allinone/ns-3.35/build/"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "/home/niki/ns-3-allinone/ns-3.35/build/compile_commands.json"
+        }
+    ],
+    "version": 4
+}

@@ -1,4 +1,26 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
+
+
+/*
+* Copyright (c) 2020 DLTLT 
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License version 2 as
+* published by the Free Software Foundation;
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*
+* Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
+*/
+
+
 #ifndef ONIONMANAGER_H
 #define ONIONMANAGER_H
 
@@ -10,6 +32,7 @@
 
 #include "ns3/onion-routing.h"
 #include "ns3/ipv4-address.h"
+#include "ns3/ipv4-l3-protocol.h"
 
 namespace ns3 {
 
@@ -57,8 +80,8 @@ public:
 *
 */
 
-  virtual int EncryptLayer (unsigned char *ciphertext, unsigned char *message, int len,
-                            unsigned char *key) const;
+  virtual void EncryptLayer (unsigned char *ciphertext, unsigned char *message, int len,
+                             unsigned char *key) const;
 
   /**
 *
@@ -72,16 +95,16 @@ public:
 *
 */
 
-  virtual int DecryptLayer (unsigned char *innerLayer, unsigned char *onion, uint16_t onionLen,
-                            unsigned char *pk, unsigned char *sk) const;
+  virtual void DecryptLayer (unsigned char *innerLayer, unsigned char *onion, uint16_t onionLen,
+                             unsigned char *pk, unsigned char *sk) const;
 
-    /**
+  /**
   *
   * \brief Generate a new public/private keypair using the libsodium library
   *
   */
   void GenerateNewKeyPair (void);
-      /**
+  /**
   *
   * \brief accessor
   * 
@@ -89,7 +112,7 @@ public:
   *
   */
   unsigned char *GetPK (void);
-        /**
+  /**
   *
   * \brief accessor
   * 
@@ -98,7 +121,7 @@ public:
   */
   unsigned char *GetSK (void);
 
-          /**
+  /**
   *
   * \brief accessor
   * 
@@ -106,7 +129,7 @@ public:
   *
   */
   std::string GetPKtoString ();
-            /**
+  /**
   *
   * \brief accessor
   * 
@@ -115,7 +138,7 @@ public:
   */
   std::string GetSKtoString ();
 
-            /**
+  /**
   *
   * \brief setter
   * 
@@ -123,7 +146,7 @@ public:
   *
   */
   void SetPK (unsigned char *pk);
-              /**
+  /**
   *
   * \brief setter
   * 
@@ -132,7 +155,7 @@ public:
   */
   void SetSK (unsigned char *sk);
 
- /**
+  /**
   *
   * \brief Convert a string to an array of unsigned chars
   * 
@@ -142,7 +165,7 @@ public:
   *
   */
   unsigned char *StringToUchar (std::string in);
-   /**
+  /**
   *
   * \brief Convert an array of unsigned chars to a std::string
   * 
@@ -154,8 +177,7 @@ public:
   */
   std::string UcharToString (unsigned char *seq, int len);
 
-
-   /**
+  /**
   *
   * \brief Convert an Ipv4 address given as an unsigned integer value to buffer array of 4Bytes
   * 
@@ -167,8 +189,8 @@ public:
   unsigned char *IpToBuff (uint32_t in);
 
 private:
-  unsigned char m_publickey[crypto_box_PUBLICKEYBYTES];  //!< the public encryption key
-  unsigned char m_secretkey[crypto_box_SECRETKEYBYTES];  //!< the secret encryption key
+  unsigned char m_publickey[crypto_box_PUBLICKEYBYTES]; //!< the public encryption key
+  unsigned char m_secretkey[crypto_box_SECRETKEYBYTES]; //!< the secret encryption key
 };
 
 } // namespace ns3
