@@ -24,11 +24,6 @@
 #ifndef ONIONVALIDATOR_H
 #define ONIONVALIDATOR_H
 
-// //Constants
-// #define AODV 0
-// #define DSR  1
-// #define OLSR 2
-// #define DSDV 3
 
 #include <iostream>
 #include <fstream>

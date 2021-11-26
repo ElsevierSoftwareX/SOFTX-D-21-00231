@@ -35,7 +35,16 @@
 namespace ns3 {
 
 /**
- * \ingroup onion_routing_wsn
+ *  \defgroup serialization
+ * 
+ *
+ *  Be sure to read repository README.md before going down to the API.
+ */
+
+
+
+/**
+ * \ingroup serialization
  * 
  * \class SerializationWrapper
  * \brief Class for the serialization-deserialization of the messagess to send in packets

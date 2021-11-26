@@ -1,6 +1,5 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-
 /*
 * Copyright (c) 2020 DLTLT 
 *
@@ -19,7 +18,6 @@
 *
 * Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
 */
-
 
 #ifndef SENSORNODE_HELPER_H
 #define SENSORNODE_HELPER_H
@@ -48,14 +46,12 @@
 
 namespace ns3 {
 
-
 /**
  * \ingroup application-helper
- * \class SinkHelper
+ * \class SensorNodeHelper
  * \brief Helper class for the creation of SensorNode applications
  *
  */
-
 
 class SensorNodeHelper : public Object
 {
@@ -112,10 +108,11 @@ public:
   Ptr<Application> InstallPriv (Ptr<Node> node) const;
 
 private:
-  Ipv4Address m_sinkAddress;  //!< Ipv4 address of the sink node
+  Ipv4Address m_sinkAddress; //!< Ipv4 address of the sink node
   Ptr<OutputManager> m_outputManager; //!< Manage the output of the simulation
   Ptr<OnionValidator> m_onionValidator; //!< Manage onions and when to abort them
-  uint16_t m_onionTimeout; //!< A watchdog timer set to abort onion messagess, if the timer elepses before the onion returns back to the sink node
+  uint16_t
+      m_onionTimeout; //!< A watchdog timer set to abort onion messagess, if the timer elepses before the onion returns back to the sink node
   ObjectFactory m_factory; //!< factory object
 };
 

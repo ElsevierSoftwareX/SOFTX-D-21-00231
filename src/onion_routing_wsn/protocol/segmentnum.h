@@ -31,7 +31,7 @@
 namespace ns3 {
 
 /**
- * \ingroup onion_routing_wsn
+ * \ingroup serialization
  * 
  * \class SegmentNum
  * \brief Class for adding a tag to packets used to track different segments of packets packets are fragmented due to small MSS

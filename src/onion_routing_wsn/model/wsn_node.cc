@@ -1,6 +1,5 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-
 /*
 * Copyright (c) 2020 DLTLT 
 *
@@ -19,7 +18,6 @@
 *
 * Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
 */
-
 
 #include "wsn_node.h"
 
@@ -87,11 +85,7 @@ Wsn_node::Configure ()
   Ipv4Address address = iaddr.GetLocal ();
   m_address = address;
 
-  //TypeId tid = TypeId::LookupByName ("ns3::TcpSocketFactory");
-  //m_socket = Socket::CreateSocket (GetNode(),tid);
   m_socket = Socket::CreateSocket (GetNode (), TcpSocketFactory::GetTypeId ());
-  //m_socket.SetInitialCwnd(20)
-  //socket to listen
   InetSocketAddress local (Ipv4Address::GetAny (), m_port);
   m_socket->SetIpRecvTtl (true);
   m_socket->Bind (local);
@@ -101,7 +95,6 @@ Wsn_node::Configure ()
   Ptr<MobilityModel> mob = PtrNode->GetObject<MobilityModel> ();
   double coord_x = mob->GetPosition ().x;
   double coord_y = mob->GetPosition ().y;
-  //mob->SetPosition(Vector(coord_x+1,coord_y+1,0));
 
   //if the routing is OLSR we can print out the number of one-hop neighbours from routing info
   if (m_outputManager->GetRouting () == Routing::OLSR)
@@ -172,7 +165,7 @@ Wsn_node::getNodeDelay (Ipv4Address node_address)
 /*
 *	Send a packet as a TCP segment to the remote node
 *	add a tag to the packet, which defines the size of the whole packet
-*	segment size is limited by MSS or MTU
+*	segment size is limited by MSS 
 *	The packet if to large is automatically splitted in many segments
 */
 
@@ -184,7 +177,7 @@ Wsn_node::SendSegment (InetSocketAddress remote, Ptr<Packet> packet, bool b_onio
   socket->Connect (remote);
 
   int pack_size = packet->GetSize ();
-  int seg_num = pack_size / f_mss; //f_seg_size;//PAZIII!!! morda problemi zs packet size
+  int seg_num = pack_size / f_mss;
 
   if (b_onion)
     {
@@ -195,7 +188,6 @@ Wsn_node::SendSegment (InetSocketAddress remote, Ptr<Packet> packet, bool b_onio
 
   if (seg_num == 0)
     { //packet fits in segment size, just send-it
-      //std::cout << "Small pack" <<std::endl;
       socket->Send (packet);
     }
   else
@@ -204,9 +196,7 @@ Wsn_node::SendSegment (InetSocketAddress remote, Ptr<Packet> packet, bool b_onio
       SegmentNum s_num (pack_size);
       packet->AddByteTag (s_num);
       socket->Send (packet);
-      //socket->SetDataSentCallback(MakeCallback(&Wsn_node::meter,this));
     }
-  //std::cout << "Sent" <<std::endl;
 }
 
 //receive a segment
@@ -247,7 +237,6 @@ Wsn_node::RecvSeg (Ptr<Socket> socket, Ptr<Packet> p, Address from)
 
   InetSocketAddress from_address = InetSocketAddress::ConvertFrom (from);
 
-  //std::cout << "recv" <<std::endl;
   SegmentNum s_num;
   //if only one packet
   if (!p->FindFirstMatchingByteTag (s_num))
@@ -256,10 +245,6 @@ Wsn_node::RecvSeg (Ptr<Socket> socket, Ptr<Packet> p, Address from)
       socket->Close ();
       return p;
     }
-
-  //std::stringstream ss;
-  //p->PrintByteTags (ss);
-  // std::cout << ss.str() << " at: " << std::to_string(Simulator::Now().GetSeconds ())<<std::endl;
 
   if (f_pendingPacket == NULL || from_address.GetIpv4 ().Get () != f_receivingAddress.Get ())
     {
@@ -291,7 +276,6 @@ Wsn_node::RecvSeg (Ptr<Socket> socket, Ptr<Packet> p, Address from)
 void
 Wsn_node::CheckSentOnion (int count)
 {
-  //std::cout << "Hop count: " << o_hopCount << "count: " << count <<std::endl;
   if (!m_onionValidator->CheckOnionReceived (count))
     {
       m_outputManager->AbortOnion (Simulator::Now ());
@@ -302,8 +286,6 @@ Wsn_node::CheckSentOnion (int count)
 void
 Wsn_node::OnionReceived (void)
 {
-
-  //std::cout << "Onion received " << onion_seq << " real seq:" <<  m_simManager->getOnionSeq() <<std::endl;
   m_onionValidator->OnionReceived ();
 }
 

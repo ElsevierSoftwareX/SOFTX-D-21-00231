@@ -272,7 +272,6 @@ WsnConstructor::ProcessPathString ()
 
 /**
  * Create nodes and split them between node containers, to split nodes by functionality in the application
- * Split also different type of sensor nodes
  */
 void
 WsnConstructor::CreateNodes ()
@@ -364,69 +363,6 @@ WsnConstructor::CreateDevices ()
     ", MSS:" + std::to_string (m_mss) + "\n";
 }
 
-/*backuppino IEEE802.11a
- NS_LOG_INFO ("--------------- Creating and configuring devices & setup WiFi channel");
-
-  //define datarate
-  //datarate is affecting the communication range
-  //for 80211a
-  std::string phyMode ("OfdmRate12Mbps");
-
-  //for 80211b
-  //std::string phyMode ("DsssRate1Mbps");
-
-  WifiHelper wifi;
-  //define the used standard
-  wifi.SetStandard (WIFI_STANDARD_80211a);
-  wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager", "DataMode", StringValue (phyMode),
-                                "ControlMode", StringValue (phyMode));
-
-  //wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager", "DataMode", StringValue ("OfdmRate6Mbps"), "RtsCtsThreshold", UintegerValue (100));
-  //wifi.SetRemoteStationManager ("ns3::ConstantRateWifiManager", "DataMode", StringValue ("OfdmRate24Mbps"), "RtsCtsThreshold", UintegerValue (0));
-
-  //wifi.EnableLogComponents ();
-
-  // PHY configuration
-  //two different phy frameworks: SpectrumWifiPhy or YansWifiPhy
-  // takes care of the actual sending and receiving wireless signal from channel.
-  // the phy layer decides if a frame will be succesfully decoded based on the receiving signal strength and error noise
-  // you can tweak: error_rate model, who calculates the probability of succ decoding a frame
-  YansWifiPhyHelper wifiPhy = YansWifiPhyHelper ();
-
-  //Configure the channel:
-  //the channel takes care of getting signal from one device to other devices on the same Wi-Fi channel
-  //you can tweak: propagation loss & propagation delay
-  // If wifiPhy is default then is 5Ghz but if you selected 2.4GHz you must change the referenceloss
-  YansWifiChannelHelper wifiChannel;
-  wifiChannel.SetPropagationDelay ("ns3::ConstantSpeedPropagationDelayModel");
-  //if wifiPhy is default - 5Ghz
-  //wifiChannel.AddPropagationLoss ("ns3::LogDistancePropagationLossModel","Exponent", DoubleValue (3.0));
-  //if wifiPhy is 2.4Ghz
-  wifiChannel.AddPropagationLoss ("ns3::LogDistancePropagationLossModel", "Exponent",
-                                  DoubleValue (3.0), "ReferenceLoss", DoubleValue (40.0459));
-  //ref here for signal power https://www.nsnam.org/docs/models/html/propagation.html
-  //-- Reference loss is the loss in dB at 1m. therefore if more distant, you need to add the loss computed with the formula found at the reference
-  //if loss goes over (around) 100dB then signal is lost
-
-  //mount the channel on the physical layer
-  wifiPhy.SetChannel (wifiChannel.Create ());
-
-  //MAC configuration
-  //ad-hoc OR infrastructure ...
-  // QoS, HT, VHT, HE ...
-  WifiMacHelper wifiMac;
-  wifiMac.SetType ("ns3::AdhocWifiMac");
-
-  //install devices
-  wifiDevices = wifi.Install (wifiPhy, wifiMac, wifiNodes);
-   // if (trace)
-  //   {
-  //     //pcap tracing on sink node
-  //     wifiPhy.SetPcapDataLinkType (WifiPhyHelper::DLT_IEEE802_11_RADIO);
-  //     wifiPhy.EnablePcap ("wifitrace-3", wifiDevices.Get (3));
-  //   }
-  */
-
 /*
 * allocate nodes on physical positions in space
 *
@@ -450,15 +386,6 @@ WsnConstructor::BuildDiscTopology ()
     "m , disc topology radius: " + std::to_string (r_disc) +
     "m. Sink node located at x:" + std::to_string ((int) r_disc) +
     ",y:" + std::to_string ((int) r_disc) + " \n";
-
-  /*// Uniform density disc
-  ObjectFactory uniDisc;
-  uniDisc.SetTypeId ("ns3::UniformDiscPositionAllocator");
-  uniDisc.Set ("rho", DoubleValue (100));
-  uniDisc.Set ("X", DoubleValue(300));
-  uniDisc.Set ("Y", DoubleValue(300));
-  uniDisc.Set ("Z", DoubleValue(0));
-  */
 
   //Random disc
   ObjectFactory rndDisc;
@@ -721,36 +648,7 @@ main (int argc, char **argv)
 
   bt->Configure (); //configure the simulation
 
-  /*   Config::SetDefault ("ns3::ConfigStore::Filename",
-                      StringValue ("src/onion_routing_wsn/simulation-conf.xml"));
-  Config::SetDefault ("ns3::ConfigStore::FileFormat", StringValue ("Xml"));
-  Config::SetDefault ("ns3::ConfigStore::Mode", StringValue ("Save"));
-  ConfigStore outputConfig;
-  outputConfig.ConfigureDefaults ();
-  outputConfig.ConfigureAttributes (); */
-
-  //check here for other info on configstore https://www.nsnam.org/docs/manual/html/attributes.html?highlight=config%20store
-
   bt->Run ();
 
   return 0;
-}
-
-/**
- * Print all the connected nodes --- to delete
- */
-void
-WsnConstructor::PrintNodes ()
-{
-  NS_LOG_INFO ("--------------- Print connected devices ");
-
-  NS_LOG_INFO ("Wifi devices:");
-
-  for (unsigned int i = 0; i < wifiInterfaces.GetN (); i++)
-    {
-
-      NS_LOG_INFO ("\t" << wifiInterfaces.GetAddress (i));
-    }
-
-  NS_LOG_INFO ("--------------- All devices printed ");
 }

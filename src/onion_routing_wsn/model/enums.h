@@ -26,9 +26,17 @@
 
 namespace ns3 {
 
+
+/**
+ *  \defgroup enumerators
+ * 
+ *
+ *  Be sure to read repository README.md before going down to the API.
+ */
+
 /**
  * 
- * \ingroup onion_routing_wsn
+ * \ingroup enumerators
  * \enum Routing
  * \brief Enumeration defining different routing algorithms that can be used in the simulator
  */
@@ -42,7 +50,7 @@ enum Routing {
 
 /**
  * 
- * \ingroup onion_routing_wsn
+ * \ingroup enumerators
  * \enum Topology
  * \brief Enumeration defining different network topologies that can be used in the simulation
  */
@@ -54,7 +62,7 @@ enum Topology {
 
 /**
  * 
- * \ingroup onion_routing_wsn
+ * \ingroup enumerators
  * \enum IEEE_80211n
  * \brief Enumeration defining different carrier frequencies of the standard IEEE 802.11n 
  */
@@ -66,7 +74,7 @@ enum IEEE_80211n {
 
 /**
  * 
- * \ingroup onion_routing_wsn
+ * \ingroup enumerators
  * \enum Verbosity
  * \brief Verbosity settings of the simulation
  */
@@ -81,7 +89,7 @@ enum Verbosity {
 
 /**
  * 
- * \ingroup onion_routing_wsn
+ * \ingroup enumerators
  * \enum BodyOptions
  * \brief Specifies how the onion body must behave
  */

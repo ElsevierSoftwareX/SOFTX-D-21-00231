@@ -1,6 +1,5 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-
 /*
 * Copyright (c) 2020 DLTLT 
 *
@@ -19,7 +18,6 @@
 *
 * Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
 */
-
 
 #include "sink.h"
 
@@ -88,8 +86,6 @@ Sink::Setup (uint16_t *onionPathlengths, uint16_t numOnionLengths, int repeateTi
 void
 Sink::Accept (Ptr<Socket> socket, const ns3::Address &from)
 {
-  //std::cout << "Connection accepted" << std::endl;
-  //socket->SetIpRecvTtl (true);
   socket->SetRecvCallback (MakeCallback (&Sink::ReceivePacket, this));
 }
 
@@ -100,7 +96,6 @@ Sink::ReceivePacket (Ptr<Socket> socket)
 {
   Address from;
   Ptr<Packet> p = Wsn_node::RecvSegment (socket, from);
-  //std::cout << "Onion is back " <<std::endl;
 
   if (p != NULL)
     {
@@ -157,9 +152,6 @@ Sink::RecvHandshake (protomessage::ProtoPacket_Handshake *handshake_message, Ine
 void
 Sink::RecvOnion (protomessage::ProtoPacket_OnionBody *onion_body)
 {
-
-  //int aggregatedValue = onion_content.aggregatedvalue() - m_decoyNum;
-
   m_outputManager->OnionRoutingRecv (Simulator::Now ());
   m_outputManager->RecvOnion (Simulator::Now ());
   Simulator::Schedule (Seconds (0.5), &Sink::SinkTasks, this);
@@ -201,8 +193,6 @@ Sink::SinkTasks ()
     }
 }
 
-//MAX LENGTH of the route 24!!! -> otherwise need to split in two packets! MTU!
-//parameters: id of the sensor to query
 //builds randomly the route to the sensor and back
 //the length of the route is static!
 //the route can have loops, but each node must not be placed consequently in the route
@@ -246,7 +236,6 @@ Sink::PrepareOnion (int *route, int routeLen)
   unsigned char *keys[routeLen + 1];
 
   //sink details
-  //keys[routeLen] = new unsigned char[kh.GetKeyLength()];
   keys[routeLen] = m_onionManager.StringToUchar (m_publickey);
   ipRoute[routeLen] =
       m_onionManager.IpToBuff (m_address.Get ()); //set sink node as the last node in the onion path
@@ -315,7 +304,6 @@ Sink::SendOnion (uint32_t firstHop, int routeLen, unsigned char *cipher, int cip
   InetSocketAddress remote = InetSocketAddress (Ipv4Address (firstHop), m_port);
 
   Wsn_node::SendSegment (remote, p, true);
-  //onion_socket->Send (p);
 
   m_onionValidator->StartOnion (m_onionId);
   //increment onion sequence number
@@ -333,8 +321,6 @@ Sink::SendOnion (uint32_t firstHop, int routeLen, unsigned char *cipher, int cip
 void
 Sink::CheckOnion (void)
 {
-  //std::cout << "Check onion " << std::endl;
-
   //no onion running then -> send an onion
   if (!m_onionValidator->OnionStatus ())
     { //Onion was aborted start a new one
@@ -351,8 +337,6 @@ Sink::CheckOnion (void)
 void
 Sink::StartApplication (void)
 {
-  //std::cout << "Check onion " << std::endl;
-
   //basic configuration
   Wsn_node::Configure ();
   m_onionManager.GenerateNewKeyPair ();

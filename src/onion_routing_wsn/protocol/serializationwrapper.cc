@@ -18,7 +18,6 @@
 * Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
 */
 
-
 #include "serializationwrapper.h"
 #include "ns3/header.h"
 #include "ns3/network-module.h"
@@ -58,7 +57,6 @@ SerializationWrapper::~SerializationWrapper ()
 void
 SerializationWrapper::SetData (protomessage::ProtoPacket message)
 {
-  //onion_message = onionmessage;
 
   m_dataSize = message.ByteSizeLong ();
 
@@ -71,8 +69,6 @@ SerializationWrapper::SetData (protomessage::ProtoPacket message)
 
   message.SerializeToArray (&m_data[4], m_dataSize);
 }
-
-
 
 //vrne protobuf object
 void
@@ -126,8 +122,6 @@ SerializationWrapper::Deserialize (Buffer::Iterator start)
 void
 SerializationWrapper::Print (std::ostream &os) const
 {
-  //std::cout << "Print not implemented" << std::endl;
-
   os << "not printing the header";
 }
 

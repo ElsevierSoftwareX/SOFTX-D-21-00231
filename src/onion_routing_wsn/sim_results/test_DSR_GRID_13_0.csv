@@ -3,65 +3,65 @@ Simulation name: test_DSR_GRID_13_0
 Simulation randomstream setup, run: 1, seed:1
 Total sensornodes: 13 and 1 sink node 
 Wireless: IEEE 802.11n at 2.4GHz, , DataMode: HtMcs1, ControlMode: HtMcs1, MTU:1280, MSS:536
-Network topology: GRID with row size: 3. Distance between nodes on X-axis: 60m. Distance between nodes on Y-axis: 60m. Sink node located at x:60,y:60 
+Network topology: GRID with row size: 3. Distance between nodes on X-axis: 50m. Distance between nodes on Y-axis: 50m. Sink node located at x:50,y:50 
 Routing: DSR
 Routing setup time: 20s, nodes are starting sequentially with 200ms interval, onion starts at: 27s
 Onion path lengths: 5 10 15  repeate each path lenght 1 times.
-Simulation started at: Thu Nov 25 14:22:35 2021
+Simulation started at: Fri Nov 26 11:10:37 2021
 --csv headers--
 onion_details,sim_name,sim_num,num_of_nodes,topology,routing,onion_id,packet_size,onion_head_size,onion_body_size,onion_path_length,sent_at,recv_at,query_time_to_return
 onion_routing,sim_name,sim_num,num_of_nodes,topology,routing,onion_id,send_ip,recv_ip,packet_size,onion_head_size,onion_body_size,sent_at,recv_at,hop_time
 timeout,sim_name,sim_num,num_of_nodes,topology,routing,onion_id,onion_path_length,abort_time
 node_details,sim_name,sim_num,num_of_nodes,topology,routing,coord_x,coord_y,node_degree
 -----------------------------------Simulation output--------------------------------------
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.1,10.1.0.14,411,267,134,28.400000,29.402684,1.002684
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.14,10.1.0.2,411,267,134,29.402684,32.644384,3.241701
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.2,10.1.0.6,411,267,134,32.644384,33.659530,1.015146
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.6,10.1.0.14,411,267,134,33.659530,34.661030,1.001500
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.14,10.1.0.9,411,267,134,34.661030,35.663681,1.002651
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.9,10.1.0.1,411,267,134,35.663681,36.665713,1.002032
-onion_details,test_DSR_GRID_13_0,0,13,grid,dsr,1,411,267,134,5,28.400000,36.665713,8.265713
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.1,10.1.0.11,671,527,134,37.165713,38.169165,1.003452
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.11,10.1.0.3,671,527,134,38.169165,40.265373,2.096208
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.3,10.1.0.13,671,527,134,40.265373,41.284262,1.018889
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.13,10.1.0.4,672,528,134,41.284262,43.563592,2.279330
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.4,10.1.0.11,672,528,134,43.563592,45.895181,2.331589
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.11,10.1.0.14,672,528,134,45.895181,46.897432,1.002251
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.14,10.1.0.13,672,528,134,46.897432,47.901224,1.003792
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.13,10.1.0.3,672,528,134,47.901224,48.906199,1.004975
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.3,10.1.0.6,671,527,134,48.906199,49.916001,1.009802
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.6,10.1.0.3,671,527,134,49.916001,53.922600,4.006599
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.3,10.1.0.1,671,527,134,53.922600,54.924859,1.002259
-onion_details,test_DSR_GRID_13_0,0,13,grid,dsr,2,671,527,134,10,37.165713,54.924859,17.759146
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.1,10.1.0.4,931,787,134,55.424859,56.426502,1.001643
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.4,10.1.0.8,931,787,134,56.426502,57.483834,1.057333
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.8,10.1.0.12,931,787,134,57.483834,58.516716,1.032882
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.12,10.1.0.6,932,788,134,58.516716,59.520188,1.003472
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.6,10.1.0.14,932,788,134,59.520188,60.522410,1.002222
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.14,10.1.0.6,932,788,134,60.522410,64.524212,4.001802
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.6,10.1.0.4,932,788,134,64.524212,65.531822,1.007610
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.4,10.1.0.13,932,788,134,65.531822,66.541273,1.009450
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.13,10.1.0.11,932,788,134,66.541273,67.762586,1.221314
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.11,10.1.0.4,932,788,134,67.762586,68.768453,1.005867
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.4,10.1.0.5,932,788,134,68.768453,69.945872,1.177419
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.5,10.1.0.13,932,788,134,69.945872,70.952313,1.006441
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.13,10.1.0.10,932,788,134,70.952313,71.956287,1.003974
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.10,10.1.0.3,931,787,134,71.956287,72.996266,1.039979
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.3,10.1.0.7,931,787,134,72.996266,74.002554,1.006288
-onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.7,10.1.0.1,931,787,134,74.002554,75.004497,1.001943
-onion_details,test_DSR_GRID_13_0,0,13,grid,dsr,3,931,787,134,15,55.424859,75.004497,19.579638
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.1,10.1.0.14,411,267,134,28.400000,29.402686,1.002686
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.14,10.1.0.2,411,267,134,29.402686,30.466194,1.063508
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.2,10.1.0.6,411,267,134,30.466194,33.388543,2.922349
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.6,10.1.0.14,411,267,134,33.388543,34.390009,1.001466
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.14,10.1.0.9,411,267,134,34.390009,35.392651,1.002642
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,1,10.1.0.9,10.1.0.1,411,267,134,35.392651,36.393733,1.001082
+onion_details,test_DSR_GRID_13_0,0,13,grid,dsr,1,411,267,134,5,28.400000,36.393733,7.993733
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.1,10.1.0.11,671,527,134,36.893733,37.896804,1.003071
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.11,10.1.0.3,671,527,134,37.896804,38.910755,1.013950
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.3,10.1.0.13,671,527,134,38.910755,40.160836,1.250082
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.13,10.1.0.4,672,528,134,40.160836,42.404308,2.243472
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.4,10.1.0.11,672,528,134,42.404308,44.628513,2.224205
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.11,10.1.0.14,672,528,134,44.628513,45.630711,1.002198
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.14,10.1.0.13,672,528,134,45.630711,46.840431,1.209719
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.13,10.1.0.3,672,528,134,46.840431,47.846247,1.005816
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.3,10.1.0.6,671,527,134,47.846247,48.860158,1.013911
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.6,10.1.0.3,671,527,134,48.860158,52.866377,4.006219
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,2,10.1.0.3,10.1.0.1,671,527,134,52.866377,53.868550,1.002173
+onion_details,test_DSR_GRID_13_0,0,13,grid,dsr,2,671,527,134,10,36.893733,53.868550,16.974816
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.1,10.1.0.4,931,787,134,54.368550,55.370212,1.001662
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.4,10.1.0.8,931,787,134,55.370212,56.569150,1.198938
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.8,10.1.0.12,931,787,134,56.569150,57.572715,1.003564
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.12,10.1.0.6,932,788,134,57.572715,58.576318,1.003603
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.6,10.1.0.14,932,788,134,58.576318,59.578760,1.002442
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.14,10.1.0.6,932,788,134,59.578760,63.580482,4.001722
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.6,10.1.0.4,932,788,134,63.580482,64.587859,1.007377
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.4,10.1.0.13,932,788,134,64.587859,65.599655,1.011796
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.13,10.1.0.11,932,788,134,65.599655,67.105750,1.506096
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.11,10.1.0.4,932,788,134,67.105750,68.112327,1.006576
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.4,10.1.0.5,932,788,134,68.112327,69.295793,1.183466
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.5,10.1.0.13,932,788,134,69.295793,70.300664,1.004871
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.13,10.1.0.10,932,788,134,70.300664,71.302803,1.002139
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.10,10.1.0.3,931,787,134,71.302803,72.307014,1.004211
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.3,10.1.0.7,931,787,134,72.307014,73.311437,1.004423
+onion_routing,test_DSR_GRID_13_0,0,13,grid,dsr,3,10.1.0.7,10.1.0.1,931,787,134,73.311437,74.313600,1.002163
+onion_details,test_DSR_GRID_13_0,0,13,grid,dsr,3,931,787,134,15,54.368550,74.313600,19.945050
 node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.2,0,0,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.3,60,0,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.4,120,0,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.5,0,60,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.6,60,240,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.7,120,60,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.8,0,120,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.9,60,120,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.10,120,120,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.11,0,180,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.12,60,180,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.13,120,180,null
-node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.14,0,240,null
--------------------- Simulation end: Thu Nov 25 14:22:40 2021
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.3,50,0,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.4,100,0,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.5,0,50,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.6,50,200,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.7,100,50,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.8,0,100,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.9,50,100,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.10,100,100,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.11,0,150,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.12,50,150,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.13,100,150,null
+node_details,test_DSR_GRID_13_0,0,13,grid,dsr,10.1.0.14,0,200,null
+-------------------- Simulation end: Fri Nov 26 11:10:42 2021
 

@@ -36,7 +36,7 @@ namespace ns3 {
 
 
 /**
- * \ingroup node-aplication
+ * \ingroup node-application
  * 
  * \class SensorNode
  * \brief The application of the sensor node. 

@@ -39,7 +39,7 @@
 namespace ns3 {
 
 /**
- * \ingroup node-aplication
+ * \ingroup node-application
  * 
  * \class Sink
  * \brief The application of the sink node. The node that generates onion messagess.

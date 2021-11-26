@@ -209,11 +209,6 @@ OutputManager::AbortOnion (Time abort_at)
 void
 OutputManager::NewHandshake (int node_num, Ipv4Address node_ip, Time recv_at)
 {
-  /* uncomment to print on file
-  std::string data = "handshake," + m_simName + "," + m_simDetails + "," +
-                     std::to_string (node_num) + "," + Ipv4ToString (node_ip) + "," +
-                     std::to_string (recv_at.GetSeconds ());
-  PrintLine (data); */
   NS_LOG_INFO ("New node, number: " << node_num << " ip: " << Ipv4ToString (node_ip)
                                     << " at time: " << std::to_string (recv_at.GetSeconds ()));
 }
@@ -233,7 +228,6 @@ OutputManager::AddNodeDetails (Ipv4Address node_ip, int coord_x, int coord_y, in
   std::string tmp = "node_details," + m_simName + "," + m_simDetails + "," +
                     Ipv4ToString (node_ip) + "," + std::to_string (coord_x) + "," +
                     std::to_string (coord_y) + "," + std::to_string (n_degree);
-  //std::cout << tmp << std::endl;
   this->m_nodeDetails[node_ip.Get ()] = tmp;
 }
 

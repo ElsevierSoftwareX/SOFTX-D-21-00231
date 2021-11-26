@@ -24,21 +24,18 @@
 #include <iostream>
 #include <string>
 
-#include "ns3/bridge-helper.h"
+
+
 #include "ns3/command-line.h"
 #include "ns3/config.h"
-#include "ns3/double.h"
-#include "ns3/event-id.h"
 #include "ns3/internet-stack-helper.h"
 #include "ns3/ipv4-address-helper.h"
 #include "ns3/ipv4-interface-container.h"
 #include "ns3/ipv4-list-routing-helper.h"
 #include "ns3/ipv4-static-routing-helper.h"
 #include "ns3/log.h"
-#include "ns3/log-macros-disabled.h"
 #include "ns3/net-device-container.h"
 #include "ns3/node-container.h"
-#include "ns3/ns2-mobility-helper.h"
 #include "ns3/nstime.h"
 #include "ns3/ptr.h"
 #include "ns3/simulator.h"
@@ -53,14 +50,10 @@
 #include "ns3/point-to-point-module.h"
 #include "ns3/network-module.h"
 #include "ns3/applications-module.h"
-#include "ns3/mobility-module.h"
 #include "ns3/csma-module.h"
 #include "ns3/internet-module.h"
-#include "ns3/yans-wifi-helper.h"
-#include "ns3/ssid.h"
 #include "ns3/wifi-module.h"
 #include "ns3/mobility-module.h"
-#include "ns3/wifi-helper.h"
 
 #include "ns3/onion-routing.h"
 #include "ns3/sensornode.h"
@@ -69,8 +62,6 @@
 #include "ns3/sink-helper.h"
 #include "ns3/outputmanager.h"
 #include "ns3/onionvalidator.h"
-#include "ns3/config-store-module.h"
-#include "ns3/applications-module.h"
 #include "ns3/wifi-mac.h"
 #include "ns3/qos-utils.h"
 #include "ns3/regular-wifi-mac.h"
@@ -219,7 +210,6 @@ private:
   * 
   */
   void InstallApplications ();
-  void PrintNodes ();
 
   /**
   *

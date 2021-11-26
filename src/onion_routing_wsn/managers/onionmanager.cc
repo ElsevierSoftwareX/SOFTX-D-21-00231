@@ -139,7 +139,6 @@ OnionManager::StringToUchar (std::string in)
 {
   unsigned char *out = new unsigned char[in.length ()];
   memcpy (&out[0], &in[0], in.length ());
-  //std::cout << "Eruuuuuuuuuuuuuuuuuuuuuuuuuu " << std::endl;
   return out;
 }
 
@@ -157,7 +156,6 @@ OnionManager::IpToBuff (uint32_t in)
 {
   unsigned char *out = new unsigned char[4];
   Ipv4Address (in).Serialize (&out[0]);
-  //std::cout << "Eruuuuuuuuuuuuuuuuuuuuuuuuuu " << std::endl;
   return out;
 }
 

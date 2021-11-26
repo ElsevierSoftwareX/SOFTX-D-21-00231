@@ -54,13 +54,6 @@ OnionValidator::StartOnion (int seq_n)
   m_onionSeq = seq_n;
 }
 
-/*
-Returns information about the state of the onion
-
-true - running
-false - onion aborted
-
-*/
 
 bool
 OnionValidator::OnionStatus (void)
@@ -87,7 +80,6 @@ OnionValidator::CheckOnionReceived (int hop)
 
   if (hop == this->m_hopCount)
     {
-      //std::cout << "Onion aborted, at hop: "<< hop << " at time: " << Simulator::Now().GetSeconds() << std::endl;
       //abort sending the onion
       m_onionSeq = 0; // 0 is sequence 0 null value!!! onion will be deleted
       return false;
