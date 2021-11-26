@@ -39,7 +39,7 @@ Description of software functionalities and architecture can be found in the pap
 
 A code ocean capsule can be found at:
 
-A docker image can be found at: Docker-image](https://hub.docker.com/r/nikih94/swx-or-image)
+A docker image can be found at: [Docker-image](https://hub.docker.com/r/nikih94/swx-or-image)
 
 
 ## Acknowledgments
