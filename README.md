@@ -59,7 +59,7 @@ Version 1.0
 
 ## How to Run
 
-First install everything following the: [Installation and Setup](#installation-and-setup)
+First install the recuired software following the: [Installation and Setup](#installation-and-setup)
 <br>
 Then move to the directory:
 
@@ -193,7 +193,7 @@ Maximum Segment Size in bytes
 
 Routing algorithm for ad-hoc multi-hop wireless networks, choose between:
 * aodv - Ad Hoc On-Demand Distance Vector
-* dsr - Dynamic Source Routing
+* dsr - Dynamic Source Routing (in the ns3-3.35 version the dsr routing is causing errors)
 * olsr - Optimized Link State Routing Protocol 
 * dsdv - Destination-Sequenced Distance Vector
 
