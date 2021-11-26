@@ -39,7 +39,7 @@ Description of software functionalities and architecture can be found in the pap
 
 A code ocean capsule can be found at:
 
-A docker image can be found at:
+A docker image can be found at:[Docker-image](https://hub.docker.com/r/nikih94/swx-or-image)
 
 
 ## Acknowledgments
@@ -58,6 +58,9 @@ The project is created with:
 Version 1.0
 
 ## How to Run
+
+
+### Ubuntu OS
 
 First install the recuired software following the: [Installation and Setup](#installation-and-setup)
 <br>
@@ -86,6 +89,27 @@ To execute the simulator and source parameters from CLI and the configuration fi
 To execute multiple simulations in parallel, check the Python script: [SimulationManager](link-to-sim-manager)
 
 
+### Docker image
+
+The docker image can be found at: [Docker-image](https://hub.docker.com/r/nikih94/swx-or-image)
+
+
+<br>
+
+Run the docker image using:
+
+```
+ $ docker run  nikih94/swx-or-image  /bin/bash -c  'cd /home/simulator/ns-3-allinone/ns-3.35; ./waf --run onion-routing-wsn'
+```
+
+
+Or with commandline arguments:
+
+
+```
+ $  docker run  nikih94/swx-or-image  /bin/bash -c  'cd /home/simulator/ns-3-allinone/ns-3.35; ./waf --run "onion-routing-wsn --a_simNum=0 --a_name=test --a_routing=aodv  --a_topology=grid  --a_nodeNumber=13 "'
+```
+
 
 ## Documentation
 
@@ -95,12 +119,12 @@ The software API can be found online at: [onlineAPI](https://nikih94.github.io/)
 
 <br>
 
-Or in pdf version in: [pdfAPI](refman.pdf)
+Or in pdf version in: [pdfAPI](Docs/refman.pdf)
 
 
 ### Configuration file & CLI arguments
 
-Simulation parameters can be setup via the configuration file [config](configParameters.xml).
+Simulation parameters can be setup via the configuration file [config](src/onion_routing_wsn/configParameters.xml).
 Moreover, we implemented the setup of the following parameters (SimulationName,SimulationSeed,Routing,Topology,NodeNumber) through arguments provided at CLI.
 
 ### Description of parameters affecting the simulator output
