@@ -33,13 +33,13 @@
 * [Installation and Setup](#installation-and-setup)
 
 ## General info
-This project was developed to demonstrate the feasibility of the concept presented in the research paper:
+This project was developed to demonstrate the feasibility of the concept presented in the research paper: [Submitted paper]()
 
-Description of software functionalities and architecture can be found in the paper: 
+Description of software functionalities and architecture can be found in the paper: [Software-X paper]()
 
 A code ocean capsule can be found at:
 
-A docker image can be found at:[Docker-image](https://hub.docker.com/r/nikih94/swx-or-image)
+A docker image can be found at: Docker-image](https://hub.docker.com/r/nikih94/swx-or-image)
 
 
 ## Acknowledgments
