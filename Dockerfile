@@ -73,8 +73,8 @@ RUN cd /home/simulator/ns-3-allinone/ns-3.35/src/onion_routing_wsn/protobuf  && 
     ./waf configure && ./waf build 
 
 #run the simulation
-RUN cd /home/simulator/ns-3-allinone/ns-3.35 && \
-    ./waf --run onion-routing-wsn
+#RUN cd /home/simulator/ns-3-allinone/ns-3.35 && \
+#    ./waf --run onion-routing-wsn
 
 
 
