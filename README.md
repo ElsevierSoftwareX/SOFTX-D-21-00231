@@ -89,6 +89,15 @@ To execute multiple simulations in parallel, check the Python script: [Simulatio
 
 ## Documentation
 
+### Software API
+
+The software API can be found online at: [onlineAPI](https://nikih94.github.io/)
+
+<br>
+
+Or in pdf version in: [pdfAPI](refman.pdf)
+
+
 ### Configuration file & CLI arguments
 
 Simulation parameters can be setup via the configuration file [config](configParameters.xml).
