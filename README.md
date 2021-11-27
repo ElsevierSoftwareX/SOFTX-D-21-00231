@@ -59,7 +59,7 @@ The project is created with:
 	
 ## Version
 
-Version 2.0
+Version 1.0
 
 ## How to Run
 
