@@ -44,8 +44,12 @@ A docker image can be found at: [Docker-image](https://hub.docker.com/r/nikih94/
 
 ## Acknowledgments
 
-We would like to acknowledge the collegue dr. Jernej Vičič from the University of Primorska
-Faculty of Mathematics, Natural Sciences and Information Technologies, and prof. dr. Mihael Mrissa from Innorenew CoE for the theoretical fundations, which are the basis for this implementation.
+We would like to acknowledge the collegues Aleksandar Tošić[1,2], dr. Jernej Vičič[1], and prof. dr. Mihael Mrissa[1,2] for the theoretical fundations, which are the basis for this implementation.
+<br/>
+<br/>
+[1] University of Primorska Faculty of Mathematics, Natural Sciences and Information Technologies
+<br/>
+[2] Innorenew CoE 
 
 ## Technologies
 The project is created with:
