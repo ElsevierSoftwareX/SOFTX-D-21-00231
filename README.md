@@ -33,11 +33,11 @@
 * [Installation and Setup](#installation-and-setup)
 
 ## General info
-This project was developed to demonstrate the feasibility of the concept presented in the research paper: [Submitted paper]()
+This project was developed to demonstrate the feasibility of the concept presented in the research paper: [Submitted paper](https://arxiv.org/abs/2111.14994)
 
 Description of software functionalities and architecture can be found in the paper: [Software-X paper]()
 
-A code ocean capsule can be found at:
+A code ocean capsule can be found at: [Code Capsule](https://codeocean.com/capsule/84f180e8-2f28-4a10-8004-47568ae1704f/tree)
 
 A docker image can be found at: [Docker-image](https://hub.docker.com/r/nikih94/swx-or-image)
 
@@ -90,7 +90,7 @@ To execute the simulator and source parameters from CLI and the configuration fi
  $ ./waf --run "onion-routing-wsn --a_simNum=0 --a_name=test --a_routing=aodv  --a_topology=grid  --a_nodeNumber=13 "
 ```
 
-To execute multiple simulations in parallel, check the Python script: [SimulationManager](link-to-sim-manager)
+To execute multiple simulations in parallel, check the Python script: [SimulationManager](parallelManager.py)
 
 
 ### Docker image
@@ -307,7 +307,7 @@ Set the onion body size to emulate the transportation of data / computer code in
 
 ### Docker
 
-A docker file can be found at: [Dockerfile](install.sh)
+A docker file can be found at: [Dockerfile](Dockerfile)
 
 ### Ubuntu 20.04
 
@@ -365,7 +365,7 @@ $ protoc -I=./ --cpp_out=./ ./proto-packet.proto
 $ cd ../../..
 $ ./waf configure && ./waf build 
 
-```
+```install.sh)
 
 NS-3 & PPWSim successfully installed
 
