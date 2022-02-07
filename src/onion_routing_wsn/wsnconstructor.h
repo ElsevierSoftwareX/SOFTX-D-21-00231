@@ -1,6 +1,5 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-
 /*
 * Copyright (c) 2020 DLTLT 
 *
@@ -20,41 +19,13 @@
 * Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
 */
 
-
 #include <iostream>
 #include <string>
+#include <time.h>
+#include <cmath>
 
-
-
-#include "ns3/command-line.h"
-#include "ns3/config.h"
-#include "ns3/internet-stack-helper.h"
-#include "ns3/ipv4-address-helper.h"
-#include "ns3/ipv4-interface-container.h"
-#include "ns3/ipv4-list-routing-helper.h"
-#include "ns3/ipv4-static-routing-helper.h"
-#include "ns3/log.h"
-#include "ns3/net-device-container.h"
-#include "ns3/node-container.h"
-#include "ns3/nstime.h"
-#include "ns3/ptr.h"
-#include "ns3/simulator.h"
-#include "ns3/string.h"
-#include "ns3/wifi-helper.h"
-#include "ns3/yans-wifi-helper.h"
-#include "ns3/mobility-model.h"
-#include "ns3/waypoint-mobility-model.h"
-#include "ns3/ssid.h"
-#include "ns3/mobility-module.h"
-#include "ns3/core-module.h"
-#include "ns3/point-to-point-module.h"
-#include "ns3/network-module.h"
-#include "ns3/applications-module.h"
-#include "ns3/csma-module.h"
-#include "ns3/internet-module.h"
-#include "ns3/wifi-module.h"
-#include "ns3/mobility-module.h"
-
+#include "ns3/enums.h"
+#include "ns3/outputmanager.h"
 #include "ns3/onion-routing.h"
 #include "ns3/sensornode.h"
 #include "ns3/sensornode-helper.h"
@@ -62,17 +33,18 @@
 #include "ns3/sink-helper.h"
 #include "ns3/outputmanager.h"
 #include "ns3/onionvalidator.h"
-#include "ns3/wifi-mac.h"
-#include "ns3/qos-utils.h"
-#include "ns3/regular-wifi-mac.h"
+
+#include "ns3/internet-module.h"
+#include "ns3/mobility-module.h"
+#include "ns3/network-module.h"
+#include "ns3/core-module.h"
+#include "ns3/wifi-module.h"
 #include "ns3/aodv-module.h"
 #include "ns3/olsr-module.h"
 #include "ns3/dsr-module.h"
 #include "ns3/dsdv-module.h"
-#include "ns3/outputmanager.h"
-#include <time.h>
-#include <cmath>
-
+#include "ns3/stats-module.h"
+#include "ns3/flow-monitor-module.h"
 #include "ns3/config-store-module.h"
 
 #ifndef WSNCONSTRUCTOR_H
@@ -135,6 +107,7 @@ private:
   enum Topology m_topology; //!< network topology
   enum IEEE_80211n m_mac; //!< Carrier frequency of the IEEE 802.11n
   enum Verbosity m_verbosity; //!< verbosity of the simulation
+  enum CommunicationStatistics m_stats; //!< setting of recording communication statistics
   uint16_t m_mss; //!< maximum segment size
   uint16_t m_radius; //!< Parameter for the setup of the random disc topology
   uint16_t m_cellSide; //!< Parameter for the setup of the grid topology
@@ -154,6 +127,8 @@ private:
   std::string
       m_pathsLengths; //!< String of values delimited by the symbol \",\" each value representing the number of hops the onion will travel to return back to the sink node issuer of the onion.
 
+  DataCollector data; //!< Collect data with the stats framework
+
   /**
   *
   * \brief  Split the string \p m_pathsLengths 
@@ -162,6 +137,14 @@ private:
   * 
   */
   void ProcessPathString ();
+
+  /**
+    *
+    * \brief  Instantiate objects for collecting data with the statistical framework.
+    *         data sent and received at MAC layer, and data received at Application layer
+    * 
+    */
+  void CaptureStatistics ();
 
   /**
   *

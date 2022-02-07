@@ -1,6 +1,5 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-
 /*
 * Copyright (c) 2020 DLTLT 
 *
@@ -20,7 +19,6 @@
 * Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
 */
 
-
 #ifndef WSN_NODE_H
 #define WSN_NODE_H
 
@@ -30,18 +28,19 @@
 
 #include "ns3/outputmanager.h"
 #include "ns3/segmentnum.h"
+#include "ns3/outputmanager.h"
+#include "ns3/onionmanager.h"
+#include "ns3/onionvalidator.h"
 
 #include "ns3/mobility-model.h"
 #include "ns3/core-module.h"
 #include "ns3/network-module.h"
 #include "ns3/internet-module.h"
-#include "ns3/point-to-point-module.h"
-#include "ns3/address.h"
-#include "ns3/applications-module.h"
 #include "ns3/olsr-module.h"
-#include "ns3/outputmanager.h"
-#include "ns3/onionmanager.h"
-#include "ns3/onionvalidator.h"
+#include "ns3/wifi-module.h"
+
+#include "ns3/trace-source-accessor.h"
+#include "ns3/packet.h"
 
 namespace ns3 {
 
@@ -184,6 +183,43 @@ public:
   * */
   void CheckSentOnion (int count);
 
+  /**
+  *
+  * \brief The method disables the node. The node is unreachable for other nodes and is not collaborating in routing. 
+  * 
+  * 
+  * 
+  * */
+
+  void DisableNode ();
+
+  /**
+  *
+  * \brief The method re-activates a node that was disabled using the DisableNode() method.
+  * 
+  * 
+  * */
+
+  void ActivateNode ();
+
+  /**
+  *
+  * \brief Call to signal the transmission of a \p Packet at the application layer.
+  * 
+  * 
+  * */
+
+  void NotifyTx (Ptr<const Packet> packet);
+
+  /**
+  *
+  * \brief Call to signal the receipt of a \p Packet at the application layer.
+  * 
+  * 
+  * */
+
+  void NotifyRx (Ptr<const Packet> packet);
+
 protected:
   uint16_t m_port; //!< port of the application
   Ptr<OutputManager> m_outputManager; //!< Pointer to the ns3::OutputManager
@@ -206,6 +242,10 @@ protected:
 
   uint16_t
       m_onionTimeout; //!< timer in seconds, if elepsed and the onion was not recieved by the next receiver, then delete the onion
+
+  //trace source
+  TracedCallback<Ptr<const Packet>> m_appTx; //!< traced callback for packet transmission
+  TracedCallback<Ptr<const Packet>> m_appRx; //!< traced callback for packet  receipt
 
 private:
   /**

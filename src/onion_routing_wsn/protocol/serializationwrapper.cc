@@ -50,7 +50,7 @@ SerializationWrapper::SerializationWrapper ()
 
 SerializationWrapper::~SerializationWrapper ()
 {
-  delete[] m_data;
+  //delete[] m_data;
 }
 
 //nastavi protobuf object
@@ -67,6 +67,9 @@ SerializationWrapper::SetData (protomessage::ProtoPacket message)
   m_data[2] = m_dataSize >> 16;
   m_data[3] = m_dataSize >> 24;
 
+  int size = 0;
+  memcpy (&size, &m_data[0], 4);
+
   message.SerializeToArray (&m_data[4], m_dataSize);
 }
 
@@ -75,6 +78,7 @@ void
 SerializationWrapper::GetData (protomessage::ProtoPacket *message)
 {
   message->ParseFromArray (m_data, m_dataSize);
+  delete[] m_data;
 }
 
 //Kontruktor, ki sprejme protobuf object
@@ -100,6 +104,7 @@ SerializationWrapper::Serialize (Buffer::Iterator start) const
 
   Buffer::Iterator i = start;
   i.Write (m_data, m_dataSize + 4);
+  delete[] m_data;
 }
 uint32_t
 SerializationWrapper::Deserialize (Buffer::Iterator start)
@@ -111,7 +116,8 @@ SerializationWrapper::Deserialize (Buffer::Iterator start)
   i.Read (size_arr, 4);
 
   memcpy (&size, &size_arr[0], 4);
-  //std::cout << size << std::endl;
+  delete[] size_arr;
+
   m_data = new uint8_t[size];
   i.Read (m_data, size);
   m_dataSize = size;

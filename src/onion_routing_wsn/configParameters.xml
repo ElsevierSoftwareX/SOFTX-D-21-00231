@@ -25,17 +25,19 @@
   <!-- TCP maximum segment size -->
  <default name="ns3::WsnConstructor::MSS" value="536"/> 
  <!-- Routing algorithm for wireless multi-hop networks -->
- <default name="ns3::WsnConstructor::Routing" value="aodv"/>  
+ <default name="ns3::WsnConstructor::Routing" value="olsr"/>  
   <!-- Starting delay of sensor nodes in milliseconds -->
  <default name="ns3::Wsn_node::Delay" value="200"/>  
   <!-- String of values delimited by (,) each value representing the number of hops the onion will travel-->
  <default name="ns3::WsnConstructor::Paths" value="5,10,15"/> 
  <!-- Integer specifying the number of times to generate the onion message for each value of the parameter Paths-->
- <default name="ns3::WsnConstructor::RepeatePaths" value="1"/>   
+ <default name="ns3::WsnConstructor::RepeatePaths" value="5"/>   
   <!-- Verbosity of the simulation -->
  <default name="ns3::WsnConstructor::Verbosity" value="both"/>  
+ <!-- Collect statistics about the communication overhead -->
+ <default name="ns3::WsnConstructor::CommOverhead" value="y"/>  
  <!-- The watchdog timer set to abort onion messagess -->
- <default name="ns3::Wsn_node::OnionTimeout" value="100"/>  
+ <default name="ns3::Wsn_node::OnionTimeout" value="30"/>  
  <!-- Maintain a fixed onion size by adding padding -->
  <default name="ns3::Sink::FixedOnionSize" value="true"/>  
  <!-- Modify the behaviour of the onion body -->

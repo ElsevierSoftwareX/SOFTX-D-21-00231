@@ -99,6 +99,7 @@ Sink::ReceivePacket (Ptr<Socket> socket)
 
   if (p != NULL)
     {
+      NotifyRx (p);
 
       InetSocketAddress address = InetSocketAddress::ConvertFrom (from);
       SerializationWrapper sw;
@@ -259,6 +260,12 @@ Sink::PrepareOnion (int *route, int routeLen)
   item = m_nodeManager.begin ();
   std::advance (item, route[0]);
   SendOnion (item->first, routeLen, cipher, cipherLen);
+
+  //release memory
+  for (int i = 0; i < routeLen; ++i)
+    {
+      delete[] keys[i];
+    }
 }
 
 void
@@ -303,6 +310,7 @@ Sink::SendOnion (uint32_t firstHop, int routeLen, unsigned char *cipher, int cip
 
   InetSocketAddress remote = InetSocketAddress (Ipv4Address (firstHop), m_port);
 
+  NotifyTx (p);
   Wsn_node::SendSegment (remote, p, true);
 
   m_onionValidator->StartOnion (m_onionId);

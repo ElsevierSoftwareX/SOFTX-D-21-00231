@@ -20,6 +20,12 @@
 */
 
 #include "wsn_node.h"
+#include "ns3/trace-source-accessor.h"
+#include "ns3/traced-value.h"
+#include "ns3/object.h"
+#include "ns3/uinteger.h"
+
+NS_LOG_COMPONENT_DEFINE ("Wsn_node");
 
 namespace ns3 {
 
@@ -56,9 +62,26 @@ Wsn_node::GetTypeId (void)
                          "before the onion returns back to the sink node",
                          TypeId::ATTR_CONSTRUCT | TypeId::ATTR_SET | TypeId::ATTR_GET,
                          UintegerValue (100), MakeUintegerAccessor (&Wsn_node::m_onionTimeout),
-                         MakeUintegerChecker<uint16_t> ());
+                         MakeUintegerChecker<uint16_t> ())
+          .AddTraceSource ("AppTx", "Packet transmitted",
+                           MakeTraceSourceAccessor (&Wsn_node::m_appTx),
+                           "ns3::TracedValueCallback::Packet")
+          .AddTraceSource ("AppRx", "Packet received", MakeTraceSourceAccessor (&Wsn_node::m_appRx),
+                           "ns3::TracedValueCallback::Packet");
 
   return tid;
+}
+
+void
+Wsn_node::NotifyTx (Ptr<const Packet> packet)
+{
+  m_appTx (packet);
+}
+
+void
+Wsn_node::NotifyRx (Ptr<const Packet> packet)
+{
+  m_appRx (packet);
 }
 
 Wsn_node::Wsn_node ()
@@ -106,6 +129,27 @@ Wsn_node::Configure ()
     {
       m_outputManager->AddNodeDetails (m_address, coord_x, coord_y);
     }
+}
+
+void
+Wsn_node::DisableNode ()
+{
+
+  Ptr<Node> PtrNode = this->GetNode ();
+  Ptr<NetDevice> device = PtrNode->GetDevice (0);
+  Ptr<WifiNetDevice> wifiDevice = DynamicCast<WifiNetDevice> (device);
+
+  wifiDevice->GetPhy ()->SetOffMode ();
+}
+
+void
+Wsn_node::ActivateNode ()
+{
+  Ptr<Node> PtrNode = this->GetNode ();
+  Ptr<NetDevice> device = PtrNode->GetDevice (0);
+  Ptr<WifiNetDevice> wifiDevice = DynamicCast<WifiNetDevice> (device);
+
+  wifiDevice->GetPhy ()->ResumeFromOff ();
 }
 
 /*

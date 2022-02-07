@@ -1,6 +1,5 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-
 /*
 * Copyright (c) 2020 DLTLT 
 *
@@ -19,7 +18,6 @@
 *
 * Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
 */
-
 
 #include "sensornode.h"
 
@@ -70,6 +68,10 @@ SensorNode::Handshake ()
   //send to the sink node
   InetSocketAddress remote (m_sinkAddress, m_port);
   Wsn_node::SendSegment (remote, p, false);
+
+  //Simulator::Schedule (Seconds (5), &Wsn_node::DisableNode, this);
+
+  //Simulator::Schedule (Seconds (60), &Wsn_node::ActivateNode, this);
 }
 
 //callback, when the onion is received
@@ -81,6 +83,7 @@ SensorNode::ReceivePacket (Ptr<Socket> socket)
 
   if (p != NULL)
     {
+      NotifyRx (p);
       SerializationWrapper sw;
       //get the onion message
       protomessage::ProtoPacket onion;
@@ -107,10 +110,12 @@ SensorNode::ReceivePacket (Ptr<Socket> socket)
           Ptr<Packet> np = Create<Packet> ();
           sw.SetData (onion);
           np = Create<Packet> ();
+
           np->AddHeader (sw);
 
           //send further the message
           InetSocketAddress remote (Ipv4Address (ip), m_port);
+          NotifyTx (p);
           Wsn_node::SendSegment (remote, np, true);
 
           ///Log details about the onion
@@ -160,6 +165,11 @@ SensorNode::ProcessOnionHead (protomessage::ProtoPacket_OnionHead *onionHead)
       std::string padding (outer_layer_len - onion.length (), '0');
       onionHead->set_padding (padding);
     }
+
+  //release memory
+  delete[] onionLayer->nextHopIP;
+  delete onionLayer;
+  delete[] serialized_onion;
 
   return ip;
 }

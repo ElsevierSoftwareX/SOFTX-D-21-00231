@@ -1,6 +1,5 @@
 /* -*- Mode:C++; c-file-style:"gnu"; indent-tabs-mode:nil; -*- */
 
-
 /*
 * Copyright (c) 2020 DLTLT 
 *
@@ -20,12 +19,10 @@
 * Corresponding author: Niki Hrovatin <niki.hrovatin@famnit.upr.si>
 */
 
-
 #ifndef ENUMS_H
 #define ENUMS_H
 
 namespace ns3 {
-
 
 /**
  *  \defgroup enumerators
@@ -85,6 +82,18 @@ enum Verbosity {
   ConsoleLog, //!< Output data and simulation description on console log, output data in csv file
   PrintDescription, //!< No output on console log, print simulation description and data on csv file
   Both //!< print all simulation output on console log and csv file
+};
+
+/**
+ * 
+ * \ingroup enumerators
+ * \enum CommunicationStatistics
+ * \brief Statistics about the communication overhead in the network at MAC and Application layer
+ */
+
+enum CommunicationStatistics {
+  N = 0, //!< no output
+  Y //!< output on file in "./src/onion_routing_wsn/sim_results/"
 };
 
 /**

@@ -31,8 +31,7 @@
 #include <stdio.h>
 
 #include "ns3/onion-routing.h"
-#include "ns3/ipv4-address.h"
-#include "ns3/ipv4-l3-protocol.h"
+#include "ns3/internet-module.h"
 
 namespace ns3 {
 

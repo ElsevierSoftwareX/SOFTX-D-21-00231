@@ -33,7 +33,7 @@
 #include "ns3/wsn_node.h"
 #include "ns3/proto-packet.pb.h"
 #include "ns3/serializationwrapper.h"
-#include "ns3/address.h"
+#include "ns3/network-module.h"
 #include "ns3/enums.h"
 
 namespace ns3 {
